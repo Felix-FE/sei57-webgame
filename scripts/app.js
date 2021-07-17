@@ -66,11 +66,25 @@ function columnAssignment(){
   console.log(columnArray)
 }
 
-const directionSelection = 'V'
+const directionSelection = 'H'
 
+// let prevSelectionSet = []
+let selectionSet = []
 
 function playerSelection(e){
-  const selectionSet = []
+  
+  // prevSelectionSet.forEach(cell => {
+  //   cell.classList.remove('selectedValid')
+  //   prevSelectionSet.shift
+  // });
+
+  selectionSet.forEach(cell => {
+    if(cell !== undefined){ 
+      cell.classList.remove('selectedValid')
+    }
+  });
+
+  selectionSet = []
   let selectionSetPossible = true
 
   // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
@@ -149,10 +163,13 @@ function playerSelection(e){
         selectionSetPossible = false}})
     }
   } 
-  console.log(selectionSetPossible)
-  console.log('clicked baby')
-  console.log(e.target.getAttribute('value'))
-  console.log(selectionSet)
+  if (selectionSetPossible === true){
+    selectionSet.forEach(cell => {
+      if (cell !== undefined){
+        cell.classList.add('selectedValid')
+      }
+    })
+  }
 }
   
 
@@ -165,7 +182,7 @@ createGrid()
 rowAssignment()
 columnAssignment()
 
-cellsPlayer.forEach(cell => cell.addEventListener('click', playerSelection))
+cellsPlayer.forEach(cell => cell.addEventListener('mouseover', playerSelection))
 
 // Testing and Initialisation
 

@@ -33,3 +33,11 @@ body {
 #playerGrid div h1, #computerGrid div h1 {
   font-size: 10px;
 }
+
+.selectedValid {
+  background-color: lightgreen;
+}
+
+.selectedInvalid {
+  background-color: red;
+}
