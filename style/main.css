@@ -38,6 +38,10 @@ body {
   background-color: lightgreen;
 }
 
+.shipDeployed {
+  background-color: green;
+}
+
 .selectedInvalid {
   background-color: red;
 }

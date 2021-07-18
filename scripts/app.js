@@ -136,6 +136,9 @@ let directionSelection = 'V'
 // let prevSelectionSet = []
 let selectionSet = []
 
+let selectionSetPossible = null
+
+
 function playerSelection(e){
   
   // prevSelectionSet.forEach(cell => {
@@ -150,125 +153,130 @@ function playerSelection(e){
   });
 
   selectionSet = []
-  let selectionSetPossible = true
+  selectionSetPossible = true
 
   // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
   // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
   // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 1])
-  
-  if (directionSelection === 'H'){
-    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
-    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
-    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 1])
-    playerShips[shipIndex].shipAssignCommandH(e)
-    
-    if (parseFloat(e.target.getAttribute('value')) >= 0 & parseFloat(e.target.getAttribute('value')) < 10){
-      selectionSet.forEach(element => {if (rowArray[0].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if (parseFloat(e.target.getAttribute('value')) >= 10 & parseFloat(e.target.getAttribute('value')) < 20){
-      selectionSet.forEach(element => {if (rowArray[1].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if (parseFloat(e.target.getAttribute('value')) >= 20 & parseFloat(e.target.getAttribute('value')) < 30){
-      selectionSet.forEach(element => {if (rowArray[2].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if (parseFloat(e.target.getAttribute('value')) >= 30 & parseFloat(e.target.getAttribute('value')) < 40){
-      selectionSet.forEach(element => {if (rowArray[3].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if (parseFloat(e.target.getAttribute('value')) >= 40 & parseFloat(e.target.getAttribute('value')) < 50){
-      selectionSet.forEach(element => {if (rowArray[4].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if (parseFloat(e.target.getAttribute('value')) >= 50 & parseFloat(e.target.getAttribute('value')) < 60){
-      selectionSet.forEach(element => {if (rowArray[5].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if (parseFloat(e.target.getAttribute('value')) >= 60 & parseFloat(e.target.getAttribute('value')) < 70){
-      selectionSet.forEach(element => {if (rowArray[6].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if (parseFloat(e.target.getAttribute('value')) >= 70 & parseFloat(e.target.getAttribute('value')) < 80){
-      selectionSet.forEach(element => {if (rowArray[7].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if (parseFloat(e.target.getAttribute('value')) >= 80 & parseFloat(e.target.getAttribute('value')) < 90){
-      selectionSet.forEach(element => {if (rowArray[8].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if (parseFloat(e.target.getAttribute('value')) >= 90 & parseFloat(e.target.getAttribute('value')) < 100){
-      selectionSet.forEach(element => {if (rowArray[9].includes(element) === false){
-        selectionSetPossible = false}})
-    }
-
-  } else if(directionSelection === 'V'){
-    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
-    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 10])
-    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 10])
-
-    playerShips[shipIndex].shipAssignCommandV(e)
-
-    if((parseFloat(e.target.getAttribute('value')) % 10) === 0){
-      selectionSet.forEach(element => {if (columnArray[0].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 1){
-      selectionSet.forEach(element => {if (columnArray[1].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 2){
-      selectionSet.forEach(element => {if (columnArray[2].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 3){
-      selectionSet.forEach(element => {if (columnArray[3].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 4){
-      selectionSet.forEach(element => {if (columnArray[4].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 5){
-      selectionSet.forEach(element => {if (columnArray[5].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 6){
-      selectionSet.forEach(element => {if (columnArray[6].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 7){
-      selectionSet.forEach(element => {if (columnArray[7].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 8){
-      selectionSet.forEach(element => {if (columnArray[8].includes(element) === false){
-        selectionSetPossible = false}})
-    } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 9){
-      selectionSet.forEach(element => {if (columnArray[9].includes(element) === false){
-        selectionSetPossible = false}})
-    }
-  } 
-  if (selectionSetPossible === true){
-    selectionSet.forEach(cell => {
-      if (cell !== undefined){
-        cell.classList.add('selectedValid')
+  if(shipIndex <= 3){
+    if (directionSelection === 'H'){
+      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
+      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 1])
+      playerShips[shipIndex].shipAssignCommandH(e)
+      
+      if (parseFloat(e.target.getAttribute('value')) >= 0 && parseFloat(e.target.getAttribute('value')) < 10){
+        selectionSet.forEach(element => {if (rowArray[0].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if (parseFloat(e.target.getAttribute('value')) >= 10 && parseFloat(e.target.getAttribute('value')) < 20){
+        selectionSet.forEach(element => {if (rowArray[1].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if (parseFloat(e.target.getAttribute('value')) >= 20 && parseFloat(e.target.getAttribute('value')) < 30){
+        selectionSet.forEach(element => {if (rowArray[2].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if (parseFloat(e.target.getAttribute('value')) >= 30 && parseFloat(e.target.getAttribute('value')) < 40){
+        selectionSet.forEach(element => {if (rowArray[3].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if (parseFloat(e.target.getAttribute('value')) >= 40 && parseFloat(e.target.getAttribute('value')) < 50){
+        selectionSet.forEach(element => {if (rowArray[4].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if (parseFloat(e.target.getAttribute('value')) >= 50 && parseFloat(e.target.getAttribute('value')) < 60){
+        selectionSet.forEach(element => {if (rowArray[5].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if (parseFloat(e.target.getAttribute('value')) >= 60 && parseFloat(e.target.getAttribute('value')) < 70){
+        selectionSet.forEach(element => {if (rowArray[6].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if (parseFloat(e.target.getAttribute('value')) >= 70 && parseFloat(e.target.getAttribute('value')) < 80){
+        selectionSet.forEach(element => {if (rowArray[7].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if (parseFloat(e.target.getAttribute('value')) >= 80 && parseFloat(e.target.getAttribute('value')) < 90){
+        selectionSet.forEach(element => {if (rowArray[8].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if (parseFloat(e.target.getAttribute('value')) >= 90 && parseFloat(e.target.getAttribute('value')) < 100){
+        selectionSet.forEach(element => {if (rowArray[9].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
       }
-    })
-  }
+
+    } else if(directionSelection === 'V'){
+      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 10])
+      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 10])
+
+      playerShips[shipIndex].shipAssignCommandV(e)
+
+      if((parseFloat(e.target.getAttribute('value')) % 10) === 0){
+        selectionSet.forEach(element => {if (columnArray[0].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 1){
+        selectionSet.forEach(element => {if (columnArray[1].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 2){
+        selectionSet.forEach(element => {if (columnArray[2].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 3){
+        selectionSet.forEach(element => {if (columnArray[3].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 4){
+        selectionSet.forEach(element => {if (columnArray[4].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 5){
+        selectionSet.forEach(element => {if (columnArray[5].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 6){
+        selectionSet.forEach(element => {if (columnArray[6].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 7){
+        selectionSet.forEach(element => {if (columnArray[7].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 8){
+        selectionSet.forEach(element => {if (columnArray[8].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 9){
+        selectionSet.forEach(element => {if (columnArray[9].includes(element) === false || invalidCellsPlayer.includes(element)){
+          selectionSetPossible = false}})
+      }
+    } 
+    if (selectionSetPossible === true){
+      selectionSet.forEach(cell => {
+        if (cell !== undefined){
+          cell.classList.add('selectedValid')
+        }
+      })
+    }
+  }  
 }
   
 function rotateShip(e){
   if (e.key === 'r'){
-    if(directionSelection === 'V'){
+    if (directionSelection === 'V'){
       directionSelection = 'H'
-    }else{
+    } else {
       directionSelection = 'V'
     }
   }
 }
 
 
+
 function deployShip(){
-  if (shipIndex <= 3 ){
+  if (shipIndex <= 3 && selectionSetPossible === true){
     selectionSet.forEach(cell => {
       playerShips[shipIndex].shipLocation.push(cell)
+      invalidCellsPlayer.push(cell)
+      cell.classList.add('shipDeployed')
     });
-    console.log(playerShips[0].shipLocation)
+    // console.log(playerShips[0].shipLocation)
     shipIndex += 1
-    console.log(shipIndex)
-  } else {
-    console.log('oh fuck')
-  }
+    // console.log(shipIndex)
+  } 
 }
 
 // selectionSet.push(e.target)
 //     selectionSet.push(e.target.value -= 1)
 //     selectionSet.push(e.target.value += 1)
+
+
+
 
 createGrid()
 rowAssignment()
