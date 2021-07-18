@@ -7,6 +7,71 @@ const gridC = document.querySelector('#computerGrid')
 const cellsPlayer = []
 const cellsComp = []
 
+const playerShips = [
+  {
+    shipClass: 'destroyer',
+    shipLocation: [],
+    shipDamage: [],
+    shipAssignCommandH: function(e){
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 1])
+    },
+    shipAssignCommandV: function(e){
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 10])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 10])
+    },
+  },
+  {
+    shipClass: 'Carrier',
+    shipLocation: [],
+    shipDamage: [],
+    shipAssignCommandH: function(e){
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 2])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 1])
+    },
+    shipAssignCommandV: function(e){
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 10])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 20])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 10])
+    },
+  },
+  {
+    shipClass: 'cruiser',
+    shipLocation: [],
+    shipDamage: [],
+    shipAssignCommandH: function(e){
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
+    },
+    shipAssignCommandV: function(e){
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 10])
+    },
+  },
+  {
+    shipClass: 'corvette',
+    shipLocation: [],
+    shipDamage: [],
+    shipAssignCommandH: function(e){
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+    },
+    shipAssignCommandV: function(e){
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+    },
+  }
+]
+
+let shipIndex = 0
+
+const compShips = []
+
+const invalidCellsPlayer = []
+
 // Element variables
 const cellWidth = 10
 const totalCells = cellWidth * cellWidth
@@ -66,7 +131,7 @@ function columnAssignment(){
   console.log(columnArray)
 }
 
-const directionSelection = 'H'
+let directionSelection = 'V'
 
 // let prevSelectionSet = []
 let selectionSet = []
@@ -79,7 +144,7 @@ function playerSelection(e){
   // });
 
   selectionSet.forEach(cell => {
-    if(cell !== undefined){ 
+    if (cell !== undefined){ 
       cell.classList.remove('selectedValid')
     }
   });
@@ -92,9 +157,11 @@ function playerSelection(e){
   // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 1])
   
   if (directionSelection === 'H'){
-    selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
-    selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
-    selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 1])
+    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
+    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 1])
+    playerShips[shipIndex].shipAssignCommandH(e)
+    
     if (parseFloat(e.target.getAttribute('value')) >= 0 & parseFloat(e.target.getAttribute('value')) < 10){
       selectionSet.forEach(element => {if (rowArray[0].includes(element) === false){
         selectionSetPossible = false}})
@@ -128,9 +195,12 @@ function playerSelection(e){
     }
 
   } else if(directionSelection === 'V'){
-    selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
-    selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 10])
-    selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 10])
+    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 10])
+    // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 10])
+
+    playerShips[shipIndex].shipAssignCommandV(e)
+
     if((parseFloat(e.target.getAttribute('value')) % 10) === 0){
       selectionSet.forEach(element => {if (columnArray[0].includes(element) === false){
         selectionSetPossible = false}})
@@ -172,7 +242,29 @@ function playerSelection(e){
   }
 }
   
+function rotateShip(e){
+  if (e.key === 'r'){
+    if(directionSelection === 'V'){
+      directionSelection = 'H'
+    }else{
+      directionSelection = 'V'
+    }
+  }
+}
 
+
+function deployShip(){
+  if (shipIndex <= 3 ){
+    selectionSet.forEach(cell => {
+      playerShips[shipIndex].shipLocation.push(cell)
+    });
+    console.log(playerShips[0].shipLocation)
+    shipIndex += 1
+    console.log(shipIndex)
+  } else {
+    console.log('oh fuck')
+  }
+}
 
 // selectionSet.push(e.target)
 //     selectionSet.push(e.target.value -= 1)
@@ -183,7 +275,8 @@ rowAssignment()
 columnAssignment()
 
 cellsPlayer.forEach(cell => cell.addEventListener('mouseover', playerSelection))
-
+document.addEventListener('keyup', rotateShip)
+document.addEventListener('click', deployShip)
 // Testing and Initialisation
 
 
