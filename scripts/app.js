@@ -68,7 +68,64 @@ const playerShips = [
 
 let shipIndex = 0
 
-const compShips = []
+const compShips = [
+  {
+    shipClass: 'destroyer',
+    shipLocation: [],
+    shipDamage: [],
+    shipAssignCommandH: function(currentRandS){
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 1])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) - 1])
+    },
+    shipAssignCommandV: function(currentRandS){
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 10])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) - 10])
+    },
+  },
+  {
+    shipClass: 'Carrier',
+    shipLocation: [],
+    shipDamage: [],
+    shipAssignCommandH: function(currentRandS){
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 1])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 2])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) - 1])
+    },
+    shipAssignCommandV: function(currentRandS){
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 10])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 20])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) - 10])
+    },
+  },
+  {
+    shipClass: 'cruiser',
+    shipLocation: [],
+    shipDamage: [],
+    shipAssignCommandH: function(currentRandS){
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 1])
+    },
+    shipAssignCommandV: function(currentRandS){
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 10])
+    },
+  },
+  {
+    shipClass: 'corvette',
+    shipLocation: [],
+    shipDamage: [],
+    shipAssignCommandH: function(currentRandS){
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
+    },
+    shipAssignCommandV: function(currentRandS){
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
+    },
+  }
+]
 
 const invalidCellsPlayer = []
 
@@ -115,7 +172,6 @@ function rowAssignment(){
   console.log(rowArray)
 }
 
-
 // Create the column array for collision detection
 
 const columnArray = []
@@ -131,9 +187,42 @@ function columnAssignment(){
   console.log(columnArray)
 }
 
+// comp row Assignment
+
+const rowArrayComp = []
+
+function rowAssignmentComp(){
+  for (let rowNum = 0; rowNum < 10; rowNum++){
+    const currentArray = []
+    for (let divIndex = 0; divIndex < 10; divIndex++){
+      currentArray.push(cellsComp[parseInt(`${rowNum}${divIndex}`)])
+    }
+    rowArrayComp.push(currentArray)
+  }
+  console.log(rowArrayComp)
+}
+
+// Create the column array for collision detection
+
+const columnArrayComp = []
+
+function columnAssignmentComp(){
+  for (let columnNum = 0; columnNum < 10; columnNum++){
+    const currentArray = []
+    for (let divIndex = 0; divIndex < 10; divIndex++){
+      currentArray.push(cellsComp[parseInt(`${divIndex}${columnNum}`)])
+    }
+    columnArrayComp.push(currentArray)
+  }
+  console.log(columnArrayComp)
+}
+
+
+
+
+
 let directionSelection = 'V'
 
-// let prevSelectionSet = []
 let selectionSet = []
 
 let selectionSetPossible = null
@@ -141,70 +230,57 @@ let selectionSetPossible = null
 
 function playerSelection(e){
   
-  // prevSelectionSet.forEach(cell => {
-  //   cell.classList.remove('selectedValid')
-  //   prevSelectionSet.shift
-  // });
-
   selectionSet.forEach(cell => {
     if (cell !== undefined){ 
       cell.classList.remove('selectedValid')
     }
-  });
+  })
 
   selectionSet = []
   selectionSetPossible = true
 
-  // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
-  // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
-  // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 1])
-  if(shipIndex <= 3){
+  if (shipIndex <= 3){
     if (directionSelection === 'H'){
-      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
-      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
-      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 1])
+
       playerShips[shipIndex].shipAssignCommandH(e)
       
-      if (parseFloat(e.target.getAttribute('value')) >= 0 && parseFloat(e.target.getAttribute('value')) < 10){
+      if (parseFloat(e.target.getAttribute('value')) < 10){
         selectionSet.forEach(element => {if (rowArray[0].includes(element) === false || invalidCellsPlayer.includes(element)){
           selectionSetPossible = false}})
-      } else if (parseFloat(e.target.getAttribute('value')) >= 10 && parseFloat(e.target.getAttribute('value')) < 20){
+      } else if (parseFloat(e.target.getAttribute('value')) < 20){
         selectionSet.forEach(element => {if (rowArray[1].includes(element) === false || invalidCellsPlayer.includes(element)){
           selectionSetPossible = false}})
-      } else if (parseFloat(e.target.getAttribute('value')) >= 20 && parseFloat(e.target.getAttribute('value')) < 30){
+      } else if (parseFloat(e.target.getAttribute('value')) < 30){
         selectionSet.forEach(element => {if (rowArray[2].includes(element) === false || invalidCellsPlayer.includes(element)){
           selectionSetPossible = false}})
-      } else if (parseFloat(e.target.getAttribute('value')) >= 30 && parseFloat(e.target.getAttribute('value')) < 40){
+      } else if (parseFloat(e.target.getAttribute('value')) <40){
         selectionSet.forEach(element => {if (rowArray[3].includes(element) === false || invalidCellsPlayer.includes(element)){
           selectionSetPossible = false}})
-      } else if (parseFloat(e.target.getAttribute('value')) >= 40 && parseFloat(e.target.getAttribute('value')) < 50){
+      } else if (parseFloat(e.target.getAttribute('value')) < 50){
         selectionSet.forEach(element => {if (rowArray[4].includes(element) === false || invalidCellsPlayer.includes(element)){
           selectionSetPossible = false}})
-      } else if (parseFloat(e.target.getAttribute('value')) >= 50 && parseFloat(e.target.getAttribute('value')) < 60){
+      } else if (parseFloat(e.target.getAttribute('value')) < 60){
         selectionSet.forEach(element => {if (rowArray[5].includes(element) === false || invalidCellsPlayer.includes(element)){
           selectionSetPossible = false}})
-      } else if (parseFloat(e.target.getAttribute('value')) >= 60 && parseFloat(e.target.getAttribute('value')) < 70){
+      } else if (parseFloat(e.target.getAttribute('value')) < 70){
         selectionSet.forEach(element => {if (rowArray[6].includes(element) === false || invalidCellsPlayer.includes(element)){
           selectionSetPossible = false}})
-      } else if (parseFloat(e.target.getAttribute('value')) >= 70 && parseFloat(e.target.getAttribute('value')) < 80){
+      } else if (parseFloat(e.target.getAttribute('value')) < 80){
         selectionSet.forEach(element => {if (rowArray[7].includes(element) === false || invalidCellsPlayer.includes(element)){
           selectionSetPossible = false}})
-      } else if (parseFloat(e.target.getAttribute('value')) >= 80 && parseFloat(e.target.getAttribute('value')) < 90){
+      } else if (parseFloat(e.target.getAttribute('value')) < 90){
         selectionSet.forEach(element => {if (rowArray[8].includes(element) === false || invalidCellsPlayer.includes(element)){
           selectionSetPossible = false}})
-      } else if (parseFloat(e.target.getAttribute('value')) >= 90 && parseFloat(e.target.getAttribute('value')) < 100){
+      } else if (parseFloat(e.target.getAttribute('value')) < 100){
         selectionSet.forEach(element => {if (rowArray[9].includes(element) === false || invalidCellsPlayer.includes(element)){
           selectionSetPossible = false}})
       }
 
-    } else if(directionSelection === 'V'){
-      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
-      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 10])
-      // selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 10])
+    } else if (directionSelection === 'V'){
 
       playerShips[shipIndex].shipAssignCommandV(e)
 
-      if((parseFloat(e.target.getAttribute('value')) % 10) === 0){
+      if ((parseFloat(e.target.getAttribute('value')) % 10) === 0){
         selectionSet.forEach(element => {if (columnArray[0].includes(element) === false || invalidCellsPlayer.includes(element)){
           selectionSetPossible = false}})
       } else if ((parseFloat(e.target.getAttribute('value')) % 10) === 1){
@@ -264,28 +340,112 @@ function deployShip(){
       playerShips[shipIndex].shipLocation.push(cell)
       invalidCellsPlayer.push(cell)
       cell.classList.add('shipDeployed')
-    });
-    // console.log(playerShips[0].shipLocation)
+    })
     shipIndex += 1
-    // console.log(shipIndex)
   } 
 }
-
-// selectionSet.push(e.target)
-//     selectionSet.push(e.target.value -= 1)
-//     selectionSet.push(e.target.value += 1)
-
-
-
 
 createGrid()
 rowAssignment()
 columnAssignment()
+rowAssignmentComp()
+columnAssignmentComp()
 
 cellsPlayer.forEach(cell => cell.addEventListener('mouseover', playerSelection))
 document.addEventListener('keyup', rotateShip)
 document.addEventListener('click', deployShip)
+
+
 // Testing and Initialisation
 
+let selectionSetComp = []
 
 
+const invalidCellsComp = []
+
+
+function randSelection(){
+  return cellsComp[Math.floor(Math.random() * 100)]
+}
+
+function randDirection(){
+  return Math.floor(Math.random() * 2)
+}
+
+function computerSelection(){
+  
+  compShips.forEach(ship => {
+
+    selectionSetComp = []
+    let selectionSetPossibleComp = false
+
+    while (selectionSetPossibleComp === false){
+      selectionSetComp = []
+      const currentRandS = randSelection()
+      const currentRandD = randDirection()
+      if (currentRandD === 0){
+        ship.shipAssignCommandH(currentRandS)
+        console.log(selectionSetComp)
+        if (parseFloat(currentRandS.getAttribute('value')) < 10){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[0].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value')) < 20){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[1].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value')) < 30){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[2].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value')) < 40){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[3].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value')) < 50){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[4].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value')) < 60){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[5].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value')) < 70){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[6].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value')) < 80){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[7].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value')) < 90){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[8].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value')) < 100){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[9].includes(element)})) === true){selectionSetPossibleComp = true}
+        }
+
+      } else if (currentRandD === 1){
+        ship.shipAssignCommandV(currentRandS)
+        console.log(selectionSetComp)
+        if (parseFloat(currentRandS.getAttribute('value') % 10) === 0){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[0].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 1){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[1].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 2){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[2].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 3){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[3].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 4){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[4].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 5){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[5].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 6){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[6].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 7){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[7].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 8){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[8].includes(element)})) === true){selectionSetPossibleComp = true}
+        } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 9){
+          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[9].includes(element)})) === true){selectionSetPossibleComp = true}
+        }
+      }     
+    }
+    selectionSetComp.forEach(cell => {
+      if (cell !== undefined){
+        ship.shipLocation.push(cell)
+        cell.classList.add('shipDeployed')
+        invalidCellsComp.push(cell)
+      }
+    })
+  })
+
+  
+
+
+}
+
+computerSelection()
