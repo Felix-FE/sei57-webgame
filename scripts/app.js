@@ -375,7 +375,7 @@ function randDirection(){
 function computerSelection(){
   
   compShips.forEach(ship => {
-
+    console.log(ship.shipClass)
     selectionSetComp = []
     let selectionSetPossibleComp = false
 
@@ -383,69 +383,72 @@ function computerSelection(){
       selectionSetComp = []
       const currentRandS = randSelection()
       const currentRandD = randDirection()
+
       if (currentRandD === 0){
         ship.shipAssignCommandH(currentRandS)
         console.log(selectionSetComp)
         if (parseFloat(currentRandS.getAttribute('value')) < 10){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[0].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => rowArrayComp[0].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value')) < 20){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[1].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => rowArrayComp[1].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value')) < 30){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[2].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => rowArrayComp[2].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value')) < 40){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[3].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => rowArrayComp[3].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value')) < 50){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[4].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => rowArrayComp[4].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value')) < 60){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[5].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => rowArrayComp[5].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value')) < 70){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[6].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => rowArrayComp[6].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value')) < 80){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[7].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => rowArrayComp[7].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value')) < 90){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[8].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => rowArrayComp[8].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value')) < 100){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {rowArrayComp[9].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => rowArrayComp[9].includes(element) ))){selectionSetPossibleComp = true}
         }
 
       } else if (currentRandD === 1){
         ship.shipAssignCommandV(currentRandS)
         console.log(selectionSetComp)
-        if (parseFloat(currentRandS.getAttribute('value') % 10) === 0){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[0].includes(element)})) === true){selectionSetPossibleComp = true}
+        if (parseFloat(currentRandS.getAttribute('value') % 10) === 0){                             
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => columnArrayComp[0].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 1){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[1].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => columnArrayComp[1].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 2){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[2].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => columnArrayComp[2].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 3){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[3].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => columnArrayComp[3].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 4){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[4].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => columnArrayComp[4].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 5){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[5].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => columnArrayComp[5].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 6){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[6].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => columnArrayComp[6].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 7){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[7].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => columnArrayComp[7].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 8){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[8].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => columnArrayComp[8].includes(element) ))){selectionSetPossibleComp = true}
         } else if (parseFloat(currentRandS.getAttribute('value') % 10) === 9){
-          if ((selectionSetComp.some(element => {invalidCellsComp.includes(element)})) === false || (selectionSetComp.every(element => {columnArrayComp[9].includes(element)})) === true){selectionSetPossibleComp = true}
+          if ( !(selectionSetComp.some(element => invalidCellsComp.includes(element) )) === (selectionSetComp.every(element => columnArrayComp[9].includes(element) ))){selectionSetPossibleComp = true}
         }
-      }     
+      }
+      console.log(selectionSetPossibleComp)     
     }
     selectionSetComp.forEach(cell => {
       if (cell !== undefined){
         ship.shipLocation.push(cell)
         cell.classList.add('shipDeployed')
         invalidCellsComp.push(cell)
+        
       }
     })
   })
-
-  
-
-
 }
+
+
+
+
 
 computerSelection()
