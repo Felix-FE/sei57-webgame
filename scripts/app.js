@@ -66,7 +66,9 @@ const playerShips = [
   }
 ]
 
+
 let shipIndex = 0
+
 
 const compShips = [
   {
@@ -342,8 +344,12 @@ function deployShip(){
       cell.classList.add('shipDeployed')
     })
     shipIndex += 1
-  } 
-}
+    if (shipIndex === 4){
+      console.log('you are ready')
+      cellsComp.forEach(cell => cell.addEventListener('click',playerPick))
+    }
+  }
+} 
 
 createGrid()
 rowAssignment()
@@ -447,8 +453,59 @@ function computerSelection(){
   })
 }
 
-
-
-
-
 computerSelection()
+
+let previousMoveComp = null
+let previousMoveHit = null
+
+function computerMove(){
+  if(previousMoveComp === null){
+    
+  }
+}
+
+
+let playerTurn = true
+
+function playerPick(e){
+
+  if (playerTurn === true){
+    if (compShips[0].shipLocation.includes(e.target)){
+      e.target.classList.add('shipHit')
+      compShips[0].shipDamage.push(e.target)
+      playerTurn = false
+      if (compShips[0].shipDamage.length === 3){
+        compShips[0].shipLocation.array.forEach(element => {element.classList.add('shipSunk')});
+      }
+    } else if (compShips[1].shipLocation.includes(e.target)){
+      e.target.classList.add('shipHit')
+      compShips[1].shipDamage.push(e.target)
+      playerTurn = false
+      if (compShips[1].shipDamage.length === 4){
+        compShips[1].shipLocation.array.forEach(element => {element.classList.add('shipSunk')});
+      }
+    } else if (compShips[2].shipLocation.includes(e.target)){
+      e.target.classList.add('shipHit')
+      compShips[2].shipDamage.push(e.target)
+      playerTurn = false
+      if (compShips[2].shipDamage.length === 2){
+        compShips[2].shipLocation.array.forEach(element => {element.classList.add('shipSunk')});
+      }
+    } else if (compShips[3].shipLocation.includes(e.target)){
+      e.target.classList.add('shipHit')
+      compShips[3].shipDamage.push(e.target)
+      playerTurn = false
+      if (compShips[3].shipDamage.length === 1){
+        compShips[3].shipLocation.array.forEach(element => {element.classList.add('shipSunk')});
+      }
+    } else {
+      console.log('missed!')
+      playerTurn = false
+    }
+  }
+}
+
+
+if(playerTurn === false){
+  computerMove()
+}
