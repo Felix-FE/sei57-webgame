@@ -367,14 +367,14 @@ function rotateShip(e){
 
 
 function deployShip(){
-  if (shipIndex <= 4 && selectionSetPossible === true){
+  if (shipIndex <= 5 && selectionSetPossible === true){
     selectionSet.forEach(cell => {
       playerShips[shipIndex].shipLocation.push(cell)
       invalidCellsPlayer.push(cell)
       cell.classList.add('shipDeployed')
     })
     shipIndex += 1
-    if (shipIndex === 4){
+    if (shipIndex === 5){
       console.log('you are ready')
       cellsComp.forEach(cell => cell.addEventListener('click',playerPick))
       playerTurn  = true
@@ -562,6 +562,7 @@ function computerMove(){
           previousMoveComp = foundShip[0]
           playerTurn = true
           directionAttempt = 1
+          previousMoveHit = true
         } else {
           foundShip[0].classList.add('shipHit')
           selectedSquaresComp.push(foundShip[0])
@@ -576,6 +577,7 @@ function computerMove(){
           previousMoveComp = foundShip[1]
           playerTurn = true
           directionAttempt = 4
+          previousMoveHit = true
         } else {
           foundShip[1].classList.add('shipHit')
           selectedSquaresComp.push(foundShip[1])
@@ -590,6 +592,7 @@ function computerMove(){
           previousMoveComp = foundShip[2]
           playerTurn = true
           directionAttempt = 2
+          previousMoveHit = true
         } else {
           foundShip[2].classList.add('shipHit')
           selectedSquaresComp.push(foundShip[2])
@@ -604,6 +607,7 @@ function computerMove(){
           previousMoveComp = foundShip[3]
           playerTurn = true
           directionAttempt = 3
+          previousMoveHit = true
         } else {
           foundShip[3].classList.add('shipHit')
           selectedSquaresComp.push(foundShip[3])
@@ -616,7 +620,6 @@ function computerMove(){
         selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
         playerTurn = true
-        previousMoveHit = true
         previousMoveComp = currentRand
       }
     } else if (directionAttempt === 1){
@@ -627,6 +630,7 @@ function computerMove(){
           selectedSquaresComp.push(nextValueR)
           previousMoveComp = nextValueR
           playerTurn = true
+          previousMoveHit = true
         } else {
           console.log('cheese')
           nextValueR.classList.add('shipHit')
@@ -640,7 +644,6 @@ function computerMove(){
         selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
         playerTurn = true
-        previousMoveHit = true
         previousMoveComp = currentRand
       }
     } else if (directionAttempt === 2){
@@ -651,6 +654,7 @@ function computerMove(){
           selectedSquaresComp.push(nextValueL)
           previousMoveComp = nextValueL
           playerTurn = true
+          previousMoveHit = true
         } else {
           console.log('cheese')
           nextValueL.classList.add('shipHit')
@@ -664,7 +668,6 @@ function computerMove(){
         selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
         playerTurn = true
-        previousMoveHit = true
         previousMoveComp = currentRand
       }
 
@@ -677,6 +680,7 @@ function computerMove(){
           selectedSquaresComp.push(nextValueU)
           previousMoveComp = nextValueU
           playerTurn = true
+          previousMoveHit = true
         } else {
           console.log('cheese')
           nextValueU.classList.add('shipHit')
@@ -690,7 +694,6 @@ function computerMove(){
         selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
         playerTurn = true
-        previousMoveHit = true
         previousMoveComp = currentRand
       }
 
@@ -703,6 +706,7 @@ function computerMove(){
           selectedSquaresComp.push(nextValueD)
           previousMoveComp = nextValueD
           playerTurn = true
+          previousMoveHit = true
         } else {
           console.log('cheese')
           nextValueD.classList.add('shipHit')
@@ -716,7 +720,6 @@ function computerMove(){
         selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
         playerTurn = true
-        previousMoveHit = true
         previousMoveComp = currentRand
       }
 
@@ -727,7 +730,9 @@ function computerMove(){
 
 
 
-
+if(previousMoveHit === true &&  startChain === true){
+  if(compShips)
+}
 
 // if (playerShips[0].shipLocation.includes(currentRand)){
 //   currentRand.classList.add('shipHit')
@@ -832,18 +837,19 @@ function playerPick(e){
       compShips[1].shipDamage.push(e.target)
       computerMove()
       console.log(playerTurn)
-      if (compShips[1].shipDamage.length === 4){
+      if (compShips[1].shipDamage.length === 3){
         compShipsHit += 1
         console.log(compShipsHit)
         compShips[1].shipLocation.array.forEach(element => element.classList.add('shipSunk'));
-        
+          
       }
+      
     } else if (compShips[2].shipLocation.includes(e.target)){
       e.target.classList.add('shipHit')
       compShips[2].shipDamage.push(e.target)
       computerMove()
       console.log(playerTurn)
-      if (compShips[2].shipDamage.length === 2){
+      if (compShips[2].shipDamage.length === 4){
         compShipsHit += 1
         console.log(compShipsHit)
         compShips[2].shipLocation.array.forEach(element => element.classList.add('shipSunk'));
@@ -854,13 +860,25 @@ function playerPick(e){
       compShips[3].shipDamage.push(e.target)
       computerMove()
       console.log(playerTurn)
-      if (compShips[3].shipDamage.length === 1){
+      if (compShips[3].shipDamage.length === 2){
         compShipsHit += 1
         console.log(compShipsHit)
         compShips[3].shipLocation.array.forEach(element => element.classList.add('shipSunk'));
         
       }
+    } else if (compShips[4].shipLocation.includes(e.target)){
+      e.target.classList.add('shipHit')
+      compShips[4].shipDamage.push(e.target)
+      computerMove()
+      console.log(playerTurn)
+      if (compShips[4].shipDamage.length === 1){
+        compShipsHit += 1
+        console.log(compShipsHit)
+        compShips[4].shipLocation.array.forEach(element => element.classList.add('shipSunk'));
+        
+      }
     } else {
+      e.target.classList.add('shipHit')
       console.log('missed!')
       playerTurn = false
       computerMove()
