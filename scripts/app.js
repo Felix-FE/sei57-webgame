@@ -24,6 +24,21 @@ const playerShips = [
     },
   },
   {
+    shipClass: 'destroyer',
+    shipLocation: [],
+    shipDamage: [],
+    shipAssignCommandH: function(e){
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 1])
+    },
+    shipAssignCommandV: function(e){
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 10])
+      selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) - 10])
+    },
+  },
+  {
     shipClass: 'Carrier',
     shipLocation: [],
     shipDamage: [],
@@ -71,6 +86,21 @@ let shipIndex = 0
 
 
 const compShips = [
+  {
+    shipClass: 'destroyer',
+    shipLocation: [],
+    shipDamage: [],
+    shipAssignCommandH: function(currentRandS){
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 1])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) - 1])
+    },
+    shipAssignCommandV: function(currentRandS){
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 10])
+      selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) - 10])
+    },
+  },
   {
     shipClass: 'destroyer',
     shipLocation: [],
@@ -241,7 +271,7 @@ function playerSelection(e){
   selectionSet = []
   selectionSetPossible = true
 
-  if (shipIndex <= 3){
+  if (shipIndex <= 4){
     if (directionSelection === 'H'){
 
       playerShips[shipIndex].shipAssignCommandH(e)
@@ -337,7 +367,7 @@ function rotateShip(e){
 
 
 function deployShip(){
-  if (shipIndex <= 3 && selectionSetPossible === true){
+  if (shipIndex <= 4 && selectionSetPossible === true){
     selectionSet.forEach(cell => {
       playerShips[shipIndex].shipLocation.push(cell)
       invalidCellsPlayer.push(cell)
@@ -471,7 +501,7 @@ function randSelectionPlayer(){
   return cellsPlayer[Math.floor(Math.random() * 100)]
 }
 
-let originalHit = []
+// let originalHit = []
 
 const Rvalue = 1
 const Lvalue = 1
@@ -502,9 +532,9 @@ function computerMove(){
       previousMoveHit = true
       previousMoveComp = currentRand
       foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Rvalue])
+      foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Dvalue])
       foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Lvalue])
       foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Uvalue])
-      foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Dvalue])
     } else {
       currentRand.classList.add('shipHit')
       selectedSquaresComp.push(currentRand)
@@ -545,7 +575,7 @@ function computerMove(){
           selectedSquaresComp.push(foundShip[1])
           previousMoveComp = foundShip[1]
           playerTurn = true
-          directionAttempt = 2
+          directionAttempt = 4
         } else {
           foundShip[1].classList.add('shipHit')
           selectedSquaresComp.push(foundShip[1])
@@ -559,7 +589,7 @@ function computerMove(){
           selectedSquaresComp.push(foundShip[2])
           previousMoveComp = foundShip[2]
           playerTurn = true
-          directionAttempt = 3
+          directionAttempt = 2
         } else {
           foundShip[2].classList.add('shipHit')
           selectedSquaresComp.push(foundShip[2])
@@ -573,7 +603,7 @@ function computerMove(){
           selectedSquaresComp.push(foundShip[3])
           previousMoveComp = foundShip[3]
           playerTurn = true
-          directionAttempt = 4
+          directionAttempt = 3
         } else {
           foundShip[3].classList.add('shipHit')
           selectedSquaresComp.push(foundShip[3])
@@ -583,6 +613,7 @@ function computerMove(){
         }
 
       } else {
+        selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
         playerTurn = true
         previousMoveHit = true
@@ -605,7 +636,13 @@ function computerMove(){
           previousMoveHit = false
           playerTurn = true
         }
-      } else {console.log('stuckR')}
+      } else {
+        selectedSquaresComp.push(currentRand)
+        currentRand.classList.add('shipHit')
+        playerTurn = true
+        previousMoveHit = true
+        previousMoveComp = currentRand
+      }
     } else if (directionAttempt === 2){
       const nextValueL = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Lvalue]
       if (selectedSquaresComp.includes(nextValueL) === false &&  nextValueL !== undefined){
@@ -624,6 +661,7 @@ function computerMove(){
           playerTurn = true
         }
       } else {
+        selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
         playerTurn = true
         previousMoveHit = true
@@ -649,6 +687,7 @@ function computerMove(){
           playerTurn = true
         }
       } else {
+        selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
         playerTurn = true
         previousMoveHit = true
@@ -674,6 +713,7 @@ function computerMove(){
           playerTurn = true
         }
       } else {
+        selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
         playerTurn = true
         previousMoveHit = true
