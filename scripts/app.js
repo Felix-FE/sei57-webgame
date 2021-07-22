@@ -11,7 +11,7 @@ const playerShips = [
   {
     shipClass: 'destroyer',
     shipLocation: [],
-    shipDamage: [],
+    shipDamage: 0,
     shipAssignCommandH: function(e){
       selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
       selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
@@ -26,7 +26,7 @@ const playerShips = [
   {
     shipClass: 'destroyer',
     shipLocation: [],
-    shipDamage: [],
+    shipDamage: 0,
     shipAssignCommandH: function(e){
       selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
       selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
@@ -41,7 +41,7 @@ const playerShips = [
   {
     shipClass: 'Carrier',
     shipLocation: [],
-    shipDamage: [],
+    shipDamage: 0,
     shipAssignCommandH: function(e){
       selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
       selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
@@ -58,7 +58,7 @@ const playerShips = [
   {
     shipClass: 'cruiser',
     shipLocation: [],
-    shipDamage: [],
+    shipDamage: 0,
     shipAssignCommandH: function(e){
       selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
       selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value')) + 1])
@@ -71,7 +71,7 @@ const playerShips = [
   {
     shipClass: 'corvette',
     shipLocation: [],
-    shipDamage: [],
+    shipDamage: 0,
     shipAssignCommandH: function(e){
       selectionSet.push(cellsPlayer[parseFloat(e.target.getAttribute('value'))])
     },
@@ -89,7 +89,7 @@ const compShips = [
   {
     shipClass: 'destroyer',
     shipLocation: [],
-    shipDamage: [],
+    shipDamage: 0,
     shipAssignCommandH: function(currentRandS){
       selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
       selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 1])
@@ -104,7 +104,7 @@ const compShips = [
   {
     shipClass: 'destroyer',
     shipLocation: [],
-    shipDamage: [],
+    shipDamage: 0,
     shipAssignCommandH: function(currentRandS){
       selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
       selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 1])
@@ -119,7 +119,7 @@ const compShips = [
   {
     shipClass: 'Carrier',
     shipLocation: [],
-    shipDamage: [],
+    shipDamage: 0,
     shipAssignCommandH: function(currentRandS){
       selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
       selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 1])
@@ -136,7 +136,7 @@ const compShips = [
   {
     shipClass: 'cruiser',
     shipLocation: [],
-    shipDamage: [],
+    shipDamage: 0,
     shipAssignCommandH: function(currentRandS){
       selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
       selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value')) + 1])
@@ -149,7 +149,7 @@ const compShips = [
   {
     shipClass: 'corvette',
     shipLocation: [],
-    shipDamage: [],
+    shipDamage: 0,
     shipAssignCommandH: function(currentRandS){
       selectionSetComp.push(cellsComp[parseFloat(currentRandS.getAttribute('value'))])
     },
@@ -550,6 +550,38 @@ function computerMove(){
       foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Uvalue])
       console.log(`this is the set of selected: ${foundShip}`)
       playerTurn = true
+      if (currentRand.classList.contains('destroyer')){
+        playerShips[0].shipDamage += 1
+        console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+        if (playerShips[0].shipDamage === 3){
+          previousMoveHit = false
+        }
+      } else if (currentRand.classList.contains('destroyertwo')){
+        playerShips[1].shipDamage += 1
+        console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+        if (playerShips[1].shipDamage === 3){
+          previousMoveHit = false
+        }
+      } else if (currentRand.classList.contains('carrier')){
+        playerShips[2].shipDamage += 1
+        console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+        if (playerShips[2].shipDamage === 4){
+          previousMoveHit = false
+        }
+      } else if (currentRand.classList.contains('cruiser')){
+        playerShips[3].shipDamage += 1
+        console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+        if (playerShips[3].shipDamage === 2){
+          previousMoveHit = false
+        }
+      }else if (currentRand.classList.contains('corvette')){
+        playerShips[4].shipDamage += 1
+        console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+        if (playerShips[4].shipDamage === 1){
+          previousMoveHit = false
+        }
+
+      }
       
     } else {
       selectedSquaresComp.push(currentRand)
@@ -580,6 +612,38 @@ function computerMove(){
           playerTurn = true
           directionAttempt = 1
           previousMoveHit = true
+          if(foundShip[0].classList.contains('destroyer')){
+            playerShips[0].shipDamage += 1
+            console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+            if (playerShips[0].shipDamage === 3){
+              previousMoveHit = false
+            }
+          }else if (foundShip[0].classList.contains('destroyertwo')){
+            playerShips[1].shipDamage += 1
+            console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+            if (playerShips[1].shipDamage === 3){
+              previousMoveHit = false
+            }
+          }else if (foundShip[0].classList.contains('carrier')){
+            playerShips[2].shipDamage += 1
+            console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+            if (playerShips[2].shipDamage === 4){
+              previousMoveHit = false
+            }
+          }else if (foundShip[0].classList.contains('cruiser')){
+            playerShips[3].shipDamage += 1
+            console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+            if (playerShips[3].shipDamage === 2){
+              previousMoveHit = false
+            }
+          }else if (foundShip[0].classList.contains('corvette')){
+            playerShips[4].shipDamage += 1
+            console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+            if (playerShips[4].shipDamage === 1){
+              previousMoveHit = false
+            }
+    
+          }
         } else {
           selectedSquaresComp.push(foundShip[0])
           foundShip[0].classList.add('shipHit')
@@ -595,6 +659,38 @@ function computerMove(){
           playerTurn = true
           directionAttempt = 4
           previousMoveHit = true
+          if(foundShip[1].classList.contains('destroyer')){
+            playerShips[0].shipDamage += 1
+            console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+            if (playerShips[0].shipDamage === 3){
+              previousMoveHit = false
+            }
+          }else if (foundShip[1].classList.contains('destroyertwo')){
+            playerShips[1].shipDamage += 1
+            console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+            if (playerShips[1].shipDamage === 3){
+              previousMoveHit = false
+            }
+          }else if (foundShip[1].classList.contains('carrier')){
+            playerShips[2].shipDamage += 1
+            console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+            if (playerShips[2].shipDamage === 4){
+              previousMoveHit = false
+            }
+          }else if (foundShip[1].classList.contains('cruiser')){
+            playerShips[3].shipDamage += 1
+            console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+            if (playerShips[3].shipDamage === 2){
+              previousMoveHit = false
+            }
+          }else if (foundShip[1].classList.contains('corvette')){
+            playerShips[4].shipDamage += 1
+            console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+            if (playerShips[4].shipDamage === 1){
+              previousMoveHit = false
+            }
+    
+          }
         } else {
           selectedSquaresComp.push(foundShip[1])
           foundShip[1].classList.add('shipHit')
@@ -610,6 +706,38 @@ function computerMove(){
           playerTurn = true
           directionAttempt = 2
           previousMoveHit = true
+          if(foundShip[2].classList.contains('destroyer')){
+            playerShips[0].shipDamage += 1
+            console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+            if (playerShips[0].shipDamage === 3){
+              previousMoveHit = false
+            }
+          }else if (foundShip[2].classList.contains('destroyertwo')){
+            playerShips[1].shipDamage += 1
+            console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+            if (playerShips[1].shipDamage === 3){
+              previousMoveHit = false
+            }
+          }else if (foundShip[2].classList.contains('carrier')){
+            playerShips[2].shipDamage += 1
+            console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+            if (playerShips[2].shipDamage === 4){
+              previousMoveHit = false
+            }
+          }else if (foundShip[2].classList.contains('cruiser')){
+            playerShips[3].shipDamage += 1
+            console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+            if (playerShips[3].shipDamage === 2){
+              previousMoveHit = false
+            }
+          }else if (foundShip[2].classList.contains('corvette')){
+            playerShips[4].shipDamage += 1
+            console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+            if (playerShips[4].shipDamage === 1){
+              previousMoveHit = false
+            }
+    
+          }
         } else {
           selectedSquaresComp.push(foundShip[2])
           foundShip[2].classList.add('shipHit')
@@ -625,6 +753,38 @@ function computerMove(){
           playerTurn = true
           directionAttempt = 3
           previousMoveHit = true
+          if(foundShip[3].classList.contains('destroyer')){
+            playerShips[0].shipDamage += 1
+            console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+            if (playerShips[0].shipDamage === 3){
+              previousMoveHit = false
+            }
+          }else if (foundShip[3].classList.contains('destroyertwo')){
+            playerShips[1].shipDamage += 1
+            console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+            if (playerShips[1].shipDamage === 3){
+              previousMoveHit = false
+            }
+          }else if (foundShip[3].classList.contains('carrier')){
+            playerShips[2].shipDamage += 1
+            console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+            if (playerShips[2].shipDamage === 4){
+              previousMoveHit = false
+            }
+          }else if (foundShip[3].classList.contains('cruiser')){
+            playerShips[3].shipDamage += 1
+            console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+            if (playerShips[3].shipDamage === 2){
+              previousMoveHit = false
+            }
+          }else if (foundShip[3].classList.contains('corvette')){
+            playerShips[4].shipDamage += 1
+            console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+            if (playerShips[4].shipDamage === 1){
+              previousMoveHit = false
+            }
+    
+          }
         } else {
           selectedSquaresComp.push(foundShip[3])
           foundShip[3].classList.add('shipHit')
@@ -650,6 +810,47 @@ function computerMove(){
           previousMoveComp = nextValueR
           playerTurn = true
           previousMoveHit = true
+          if(nextValueR.classList.contains('destroyer')){
+            playerShips[0].shipDamage += 1
+            console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+            if (playerShips[0].shipDamage === 3){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueR.classList.contains('destroyertwo')){
+            playerShips[1].shipDamage += 1
+            console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+            if (playerShips[1].shipDamage === 3){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueR.classList.contains('carrier')){
+            playerShips[2].shipDamage += 1
+            console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+            if (playerShips[2].shipDamage === 4){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueR.classList.contains('cruiser')){
+            playerShips[3].shipDamage += 1
+            console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+            if (playerShips[3].shipDamage === 2){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueR.classList.contains('corvette')){
+            playerShips[4].shipDamage += 1
+            console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+            if (playerShips[4].shipDamage === 1){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }
         } else {
           console.log('cheese')
           selectedSquaresComp.push(nextValueR)
@@ -678,6 +879,47 @@ function computerMove(){
           previousMoveComp = nextValueL
           playerTurn = true
           previousMoveHit = true
+          if(nextValueL.classList.contains('destroyer')){
+            playerShips[0].shipDamage += 1
+            console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+            if (playerShips[0].shipDamage === 3){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueL.classList.contains('destroyertwo')){
+            playerShips[1].shipDamage += 1
+            console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+            if (playerShips[1].shipDamage === 3){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueL.classList.contains('carrier')){
+            playerShips[2].shipDamage += 1
+            console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+            if (playerShips[2].shipDamage === 4){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueL.classList.contains('cruiser')){
+            playerShips[3].shipDamage += 1
+            console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+            if (playerShips[3].shipDamage === 2){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueL.classList.contains('corvette')){
+            playerShips[4].shipDamage += 1
+            console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+            if (playerShips[4].shipDamage === 1){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }
         } else {
           console.log('cheese')
           selectedSquaresComp.push(nextValueL)
@@ -707,6 +949,47 @@ function computerMove(){
           previousMoveComp = nextValueU
           playerTurn = true
           previousMoveHit = true
+          if(nextValueU.classList.contains('destroyer')){
+            playerShips[0].shipDamage += 1
+            console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+            if (playerShips[0].shipDamage === 3){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueU.classList.contains('destroyertwo')){
+            playerShips[1].shipDamage += 1
+            console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+            if (playerShips[1].shipDamage === 3){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueU.classList.contains('carrier')){
+            playerShips[2].shipDamage += 1
+            console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+            if (playerShips[2].shipDamage === 4){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueU.classList.contains('cruiser')){
+            playerShips[3].shipDamage += 1
+            console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+            if (playerShips[3].shipDamage === 2){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueU.classList.contains('corvette')){
+            playerShips[4].shipDamage += 1
+            console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+            if (playerShips[4].shipDamage === 1){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }
         } else {
           console.log('cheese')
           selectedSquaresComp.push(nextValueU)
@@ -736,6 +1019,48 @@ function computerMove(){
           previousMoveComp = nextValueD
           playerTurn = true
           previousMoveHit = true
+          if(nextValueD.classList.contains('destroyer')){
+            playerShips[0].shipDamage += 1
+            console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+            if (playerShips[0].shipDamage === 3){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueD.classList.contains('destroyertwo')){
+            playerShips[1].shipDamage += 1
+            console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+            if (playerShips[1].shipDamage === 3){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueD.classList.contains('carrier')){
+            playerShips[2].shipDamage += 1
+            console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+            if (playerShips[2].shipDamage === 4){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueD.classList.contains('cruiser')){
+            playerShips[3].shipDamage += 1
+            console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+            if (playerShips[3].shipDamage === 2){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+          }else if (nextValueD.classList.contains('corvette')){
+            playerShips[4].shipDamage += 1
+            console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+            if (playerShips[4].shipDamage === 1){
+              previousMoveHit = false
+              directionAttempt = 0
+              foundShip = []
+            }
+    
+          }
         } else {
           console.log('cheese')
           selectedSquaresComp.push(nextValueD)
@@ -766,13 +1091,64 @@ function computerMove(){
 
 
 
+// else if (directionAttempt === 4){
+//   const nextValueD = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Dvalue]
+//   if (selectedSquaresComp.includes(nextValueD) === false  &&  nextValueD !== undefined){
+//     if (nextValueD.classList.contains('shipDeployed')){
+//       console.log('hello my lovelies')
+//       selectedSquaresComp.push(nextValueD)
+//       nextValueD.classList.add('shipHit')
+//       previousMoveComp = nextValueD
+//       playerTurn = true
+//       previousMoveHit = true
+//       if(nextValueD.classList.contains('destroyer')){
+//         playerShips[0].shipDamage += 1
+//         console.log(`the destroyer damage is: ${playerships[0].shipDamage}`)
+//       }else if (nextValueD.classList.contains('destroyerone')){
+//         playerShips[1].shipDamage += 1
+//         console.log(`the destroyer damage is: ${playerships[1].shipDamage}`)
+//       }else if (nextValueD.classList.contains('carrier')){
+//         playerShips[2].shipDamage += 1
+//         console.log(`the destroyer damage is: ${playerships[2].shipDamage}`)
+//       }else if (nextValueD.classList.contains('cruiser')){
+//         playerShips[3].shipDamage += 1
+//         console.log(`the destroyer damage is: ${playerships[3].shipDamage}`)
+//       }else if (nextValueD.classList.contains('corvette')){
+//         playerShips[4].shipDamage += 1
+//         console.log(`the destroyer damage is: ${playerships[4].shipDamage}`)
+
+//       }
+//     } else {
+//       console.log('cheese')
+//       selectedSquaresComp.push(nextValueD)
+//       nextValueD.classList.add('shipHit')
+//       foundShip = []
+//       directionAttempt = 0
+//       previousMoveHit = false
+//       playerTurn = true
+//     }
+//   } else {
+//     selectedSquaresComp.push(currentRand)
+//     currentRand.classList.add('shipHit')
+//     playerTurn = true
+//     previousMoveHit = false
+//     previousMoveComp = currentRand
+//     foundShip = []
+//     directionAttempt = 0
+//   }
+
+// }
+
+
+
+
 
 function playerPick(e){
   if (selectedSquaresPlayer.includes(e.target) === false){
     if (playerTurn === true){
       if (compShips[0].shipLocation.includes(e.target)){
         e.target.classList.add('shipHit')
-        compShips[0].shipDamage.push(e.target)
+        compShips[0].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
         compShipsHit += 1
@@ -785,7 +1161,7 @@ function playerPick(e){
         computerMove()
       } else if (compShips[1].shipLocation.includes(e.target)){
         e.target.classList.add('shipHit')
-        compShips[1].shipDamage.push(e.target)
+        compShips[1].shipDamage += 1
         selectedSquaresPlayer.push(e.target)
         console.log(playerTurn)
         compShipsHit += 1
@@ -798,7 +1174,7 @@ function playerPick(e){
         computerMove()
       } else if (compShips[2].shipLocation.includes(e.target)){
         e.target.classList.add('shipHit')
-        compShips[2].shipDamage.push(e.target)
+        compShips[2].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
         compShipsHit += 1
@@ -811,7 +1187,7 @@ function playerPick(e){
         computerMove()
       } else if (compShips[3].shipLocation.includes(e.target)){
         e.target.classList.add('shipHit')
-        compShips[3].shipDamage.push(e.target)
+        compShips[3].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
         compShipsHit += 1
@@ -824,7 +1200,7 @@ function playerPick(e){
         computerMove()
       } else if (compShips[4].shipLocation.includes(e.target)){
         e.target.classList.add('shipHit')
-        compShips[4].shipDamage.push(e.target)
+        compShips[4].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
         compShipsHit += 1
