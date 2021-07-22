@@ -372,6 +372,7 @@ function deployShip(){
       playerShips[shipIndex].shipLocation.push(cell)
       invalidCellsPlayer.push(cell)
       cell.classList.add('shipDeployed')
+      cell.style.backgroundColor = 'darkgrey'
       cell.classList.add(String(shipType[shipTypeCount]))
     })
     shipTypeCount += 1
@@ -482,6 +483,7 @@ function computerSelection(){
       if (cell !== undefined){
         ship.shipLocation.push(cell)
         cell.classList.add('shipDeployed')
+        cell.style.backgroundColor = 'darkgrey'
         invalidCellsComp.push(cell)
         
         
@@ -542,6 +544,7 @@ function computerMove(){
     if (currentRand.classList.contains('shipDeployed')){
       selectedSquaresComp.push(currentRand)
       currentRand.classList.add('shipHitSuccess')
+      currentRand.style.backgroundColor = 'red'
       previousMoveHit = true
       previousMoveComp = currentRand
       foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Rvalue])
@@ -586,6 +589,7 @@ function computerMove(){
     } else {
       selectedSquaresComp.push(currentRand)
       currentRand.classList.add('shipHit')
+      currentRand.style.backgroundColor = 'lightcoral'
       playerTurn = true
       canMove = false
       directionAttempt = 0
@@ -609,6 +613,7 @@ function computerMove(){
         if (foundShip[0].classList.contains('shipDeployed')){
           selectedSquaresComp.push(foundShip[0])
           foundShip[0].classList.add('shipHitSuccess')
+          foundShip[0].style.backgroundColor = 'red'
           previousMoveComp = foundShip[0]
           playerTurn = true
           directionAttempt = 1
@@ -648,6 +653,7 @@ function computerMove(){
         } else {
           selectedSquaresComp.push(foundShip[0])
           foundShip[0].classList.add('shipHit')
+          foundShip[0].style.backgroundColor = 'lightcoral'
           previousMoveComp = foundShip[0]
           playerTurn = true
         }
@@ -656,6 +662,7 @@ function computerMove(){
         if (foundShip[1].classList.contains('shipDeployed')){
           selectedSquaresComp.push(foundShip[1])
           foundShip[1].classList.add('shipHitSuccess')
+          foundShip[1].style.backgroundColor = 'red'
           previousMoveComp = foundShip[1]
           playerTurn = true
           directionAttempt = 4
@@ -695,6 +702,7 @@ function computerMove(){
         } else {
           selectedSquaresComp.push(foundShip[1])
           foundShip[1].classList.add('shipHit')
+          foundShip[1].style.backgroundColor = 'lightcoral'
           previousMoveComp = foundShip[1]
           playerTurn = true
         }
@@ -703,6 +711,7 @@ function computerMove(){
         if (foundShip[2].classList.contains('shipDeployed')){
           selectedSquaresComp.push(foundShip[2])
           foundShip[2].classList.add('shipHitSuccess')
+          foundShip[2].style.backgroundColor = 'red'
           previousMoveComp = foundShip[2]
           playerTurn = true
           directionAttempt = 2
@@ -742,6 +751,7 @@ function computerMove(){
         } else {
           selectedSquaresComp.push(foundShip[2])
           foundShip[2].classList.add('shipHit')
+          foundShip[2].style.backgroundColor = 'lightcoral'
           previousMoveComp = foundShip[2]
           playerTurn = true
         }
@@ -750,6 +760,7 @@ function computerMove(){
         if (foundShip[3].classList.contains('shipDeployed')){
           selectedSquaresComp.push(foundShip[3])
           foundShip[3].classList.add('shipHitSuccess')
+          foundShip[3].style.backgroundColor = 'red'
           previousMoveComp = foundShip[3]
           playerTurn = true
           directionAttempt = 3
@@ -789,6 +800,7 @@ function computerMove(){
         } else {
           selectedSquaresComp.push(foundShip[3])
           foundShip[3].classList.add('shipHit')
+          foundShip[3].style.backgroundColor = 'lightcoral'
           previousMoveComp = foundShip[3]
           playerTurn = true
         }
@@ -796,6 +808,7 @@ function computerMove(){
       } else {
         selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
+        foundShip[3].style.backgroundColor = 'lightcoral'
         playerTurn = true
         previousMoveComp = currentRand
         previousMoveHit = false
@@ -808,6 +821,7 @@ function computerMove(){
           console.log('hello my lovelies')
           selectedSquaresComp.push(nextValueR)
           nextValueR.classList.add('shipHitSuccess')
+          nextValueR.style.backgroundColor = 'red'
           previousMoveComp = nextValueR
           playerTurn = true
           previousMoveHit = true
@@ -856,6 +870,7 @@ function computerMove(){
           console.log('cheese')
           selectedSquaresComp.push(nextValueR)
           nextValueR.classList.add('shipHit')
+          nextValueR.style.backgroundColor = 'lightcoral'
           foundShip = []
           directionAttempt = 0
           previousMoveHit = false
@@ -864,6 +879,7 @@ function computerMove(){
       } else {
         selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
+        nextValueR.style.backgroundColor = 'lightcoral'
         playerTurn = true
         previousMoveComp = currentRand
         previousMoveHit = false
@@ -877,6 +893,7 @@ function computerMove(){
           console.log('hello my lovelies')
           selectedSquaresComp.push(nextValueL)
           nextValueL.classList.add('shipHitSuccess')
+          nextValueL.style.backgroundColor = 'red'
           previousMoveComp = nextValueL
           playerTurn = true
           previousMoveHit = true
@@ -925,6 +942,7 @@ function computerMove(){
           console.log('cheese')
           selectedSquaresComp.push(nextValueL)
           nextValueL.classList.add('shipHit')
+          nextValueL.style.backgroundColor = 'lightcoral'
           foundShip = []
           directionAttempt = 0
           previousMoveHit = false
@@ -933,6 +951,7 @@ function computerMove(){
       } else {
         selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
+        nextValueL.style.backgroundColor = 'lightcoral'
         playerTurn = true
         previousMoveHit = false
         previousMoveComp = currentRand
@@ -947,6 +966,7 @@ function computerMove(){
           console.log('hello my lovelies')
           selectedSquaresComp.push(nextValueU)
           nextValueU.classList.add('shipHitSuccess')
+          nextValueU.style.backgroundColor = 'red'
           previousMoveComp = nextValueU
           playerTurn = true
           previousMoveHit = true
@@ -995,6 +1015,7 @@ function computerMove(){
           console.log('cheese')
           selectedSquaresComp.push(nextValueU)
           nextValueU.classList.add('shipHit')
+          nextValueU.style.backgroundColor = 'lightcoral'
           foundShip = []
           directionAttempt = 0
           previousMoveHit = false
@@ -1003,6 +1024,7 @@ function computerMove(){
       } else {
         selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
+        nextValueU.style.backgroundColor = 'lightcoral'
         playerTurn = true
         previousMoveHit = false
         previousMoveComp = currentRand
@@ -1017,6 +1039,7 @@ function computerMove(){
           console.log('hello my lovelies')
           selectedSquaresComp.push(nextValueD)
           nextValueD.classList.add('shipHitSuccess')
+          nextValueD.style.backgroundColor = 'red'
           previousMoveComp = nextValueD
           playerTurn = true
           previousMoveHit = true
@@ -1066,6 +1089,7 @@ function computerMove(){
           console.log('cheese')
           selectedSquaresComp.push(nextValueD)
           nextValueD.classList.add('shipHit')
+          nextValueD.style.backgroundColor = 'lightcoral'
           foundShip = []
           directionAttempt = 0
           previousMoveHit = false
@@ -1074,6 +1098,7 @@ function computerMove(){
       } else {
         selectedSquaresComp.push(currentRand)
         currentRand.classList.add('shipHit')
+        nextValueD.style.backgroundColor = 'lightcoral'
         playerTurn = true
         previousMoveHit = false
         previousMoveComp = currentRand
@@ -1149,6 +1174,7 @@ function playerPick(e){
     if (playerTurn === true){
       if (compShips[0].shipLocation.includes(e.target)){
         e.target.classList.add('shipHitSuccess')
+        e.target.style.backgroundColor = 'red'
         compShips[0].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
@@ -1159,9 +1185,10 @@ function playerPick(e){
         //   compShips[0].shipLocation.forEach(element => element.classList.add('shipSunk'));
           
         // }
-        computerMove()
+        setTimeout(computerMove, 1000)
       } else if (compShips[1].shipLocation.includes(e.target)){
         e.target.classList.add('shipHitSuccess')
+        e.target.style.backgroundColor = 'red'
         compShips[1].shipDamage += 1
         selectedSquaresPlayer.push(e.target)
         console.log(playerTurn)
@@ -1172,9 +1199,10 @@ function playerPick(e){
         //   compShips[1].shipLocation.forEach(element => element.classList.add('shipSunk'));
             
         // }
-        computerMove()
+        setTimeout(computerMove, 1000)
       } else if (compShips[2].shipLocation.includes(e.target)){
         e.target.classList.add('shipHitSuccess')
+        e.target.style.backgroundColor = 'red'
         compShips[2].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
@@ -1185,9 +1213,10 @@ function playerPick(e){
         //   compShips[2].shipLocation.forEach(element => element.classList.add('shipSunk'));
           
         // }
-        computerMove()
+        setTimeout(computerMove, 1000)
       } else if (compShips[3].shipLocation.includes(e.target)){
         e.target.classList.add('shipHitSuccess')
+        e.target.style.backgroundColor = 'red'
         compShips[3].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
@@ -1198,9 +1227,10 @@ function playerPick(e){
         //   compShips[3].shipLocation.forEach(element => element.classList.add('shipSunk'));
           
         // }
-        computerMove()
+        setTimeout(computerMove, 1000)
       } else if (compShips[4].shipLocation.includes(e.target)){
         e.target.classList.add('shipHitSuccess')
+        e.target.style.backgroundColor = 'red'
         compShips[4].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
@@ -1211,13 +1241,14 @@ function playerPick(e){
         //   compShips[4].shipLocation.forEach(element => element.classList.add('shipSunk'));
           
         // }
-        computerMove()
+        setTimeout(computerMove, 1000)
       } else {
         e.target.classList.add('shipHit')
+        e.target.style.backgroundColor = 'lightcoral'
         console.log('missed!')
         playerTurn = false
         selectedSquaresPlayer.push(e.target)
-        computerMove()
+        setTimeout(computerMove, 1000)
       }
     }
     if (compShipsHit === 13){

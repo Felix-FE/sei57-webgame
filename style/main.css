@@ -13,7 +13,6 @@ body {
   justify-content:space-between;
   width: 1000px;
   height: 400px;
-  border: 1px solid black;
 }
 
 /* Grid Setup */
@@ -26,10 +25,24 @@ body {
 }
 
 #playerGrid div, #computerGrid div {
-  border: 1px solid darkblue;
+  border: 1px solid lightskyblue;
+  /* background-color: lightblue; */
   height: 10%;
   width: 10%;
 }
+
+#playerGrid {
+  background-color: cyan;
+  border: 20px solid slategray;
+  border-radius: 10px;
+}
+
+#computerGrid{
+  background-color: cyan;
+  border: 20px solid slategray;
+  border-radius: 10px;
+}
+
 
 #playerGrid div h1, #computerGrid div h1 {
   font-size: 10px;
@@ -47,13 +60,14 @@ body {
   background-color: red;
 }
 
-.shipHit {
-  background-color: brown;
-}
 
-.shipHitSuccess {
+/* .shipHit {
+  background-color: brown;
+} */
+
+/* .shipHitSuccess {
   background: red;
-}
+} */
 
 /* ship index */
 
@@ -62,6 +76,7 @@ body {
   justify-content: space-between;
   height: 200px;
   width: 1000px;
+  margin-top: 30px;
 }
 
 .playerShips {
