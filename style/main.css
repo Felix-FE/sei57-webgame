@@ -26,7 +26,7 @@ body {
 }
 
 #playerGrid div, #computerGrid div {
-  border: 1px solid black;
+  border: 1px solid darkblue;
   height: 10%;
   width: 10%;
 }
@@ -48,7 +48,11 @@ body {
 }
 
 .shipHit {
-  background-color: red;
+  background-color: brown;
+}
+
+.shipHitSuccess {
+  background: red;
 }
 
 /* ship index */

@@ -541,7 +541,7 @@ function computerMove(){
     // }
     if (currentRand.classList.contains('shipDeployed')){
       selectedSquaresComp.push(currentRand)
-      currentRand.classList.add('shipHit')
+      currentRand.classList.add('shipHitSuccess')
       previousMoveHit = true
       previousMoveComp = currentRand
       foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Rvalue])
@@ -588,6 +588,7 @@ function computerMove(){
       currentRand.classList.add('shipHit')
       playerTurn = true
       canMove = false
+      directionAttempt = 0
       foundShip = []
     }
     
@@ -607,7 +608,7 @@ function computerMove(){
       if (selectedSquaresComp.includes(foundShip[0]) === false && foundShip[0] !== undefined){
         if (foundShip[0].classList.contains('shipDeployed')){
           selectedSquaresComp.push(foundShip[0])
-          foundShip[0].classList.add('shipHit')
+          foundShip[0].classList.add('shipHitSuccess')
           previousMoveComp = foundShip[0]
           playerTurn = true
           directionAttempt = 1
@@ -654,7 +655,7 @@ function computerMove(){
       } else if (selectedSquaresComp.includes(foundShip[1]) === false && foundShip[1] !== undefined){
         if (foundShip[1].classList.contains('shipDeployed')){
           selectedSquaresComp.push(foundShip[1])
-          foundShip[1].classList.add('shipHit')
+          foundShip[1].classList.add('shipHitSuccess')
           previousMoveComp = foundShip[1]
           playerTurn = true
           directionAttempt = 4
@@ -701,7 +702,7 @@ function computerMove(){
       } else if (selectedSquaresComp.includes(foundShip[2]) === false && foundShip[2] !== undefined){
         if (foundShip[2].classList.contains('shipDeployed')){
           selectedSquaresComp.push(foundShip[2])
-          foundShip[2].classList.add('shipHit')
+          foundShip[2].classList.add('shipHitSuccess')
           previousMoveComp = foundShip[2]
           playerTurn = true
           directionAttempt = 2
@@ -748,7 +749,7 @@ function computerMove(){
       } else if (selectedSquaresComp.includes(foundShip[3]) === false && foundShip[3] !== undefined){
         if (foundShip[3].classList.contains('shipDeployed')){
           selectedSquaresComp.push(foundShip[3])
-          foundShip[3].classList.add('shipHit')
+          foundShip[3].classList.add('shipHitSuccess')
           previousMoveComp = foundShip[3]
           playerTurn = true
           directionAttempt = 3
@@ -806,7 +807,7 @@ function computerMove(){
         if (nextValueR.classList.contains('shipDeployed')){
           console.log('hello my lovelies')
           selectedSquaresComp.push(nextValueR)
-          nextValueR.classList.add('shipHit')
+          nextValueR.classList.add('shipHitSuccess')
           previousMoveComp = nextValueR
           playerTurn = true
           previousMoveHit = true
@@ -875,7 +876,7 @@ function computerMove(){
         if (nextValueL.classList.contains('shipDeployed')){
           console.log('hello my lovelies')
           selectedSquaresComp.push(nextValueL)
-          nextValueL.classList.add('shipHit')
+          nextValueL.classList.add('shipHitSuccess')
           previousMoveComp = nextValueL
           playerTurn = true
           previousMoveHit = true
@@ -945,7 +946,7 @@ function computerMove(){
         if (nextValueU.classList.contains('shipDeployed')){
           console.log('hello my lovelies')
           selectedSquaresComp.push(nextValueU)
-          nextValueU.classList.add('shipHit')
+          nextValueU.classList.add('shipHitSuccess')
           previousMoveComp = nextValueU
           playerTurn = true
           previousMoveHit = true
@@ -1015,7 +1016,7 @@ function computerMove(){
         if (nextValueD.classList.contains('shipDeployed')){
           console.log('hello my lovelies')
           selectedSquaresComp.push(nextValueD)
-          nextValueD.classList.add('shipHit')
+          nextValueD.classList.add('shipHitSuccess')
           previousMoveComp = nextValueD
           playerTurn = true
           previousMoveHit = true
@@ -1147,7 +1148,7 @@ function playerPick(e){
   if (selectedSquaresPlayer.includes(e.target) === false){
     if (playerTurn === true){
       if (compShips[0].shipLocation.includes(e.target)){
-        e.target.classList.add('shipHit')
+        e.target.classList.add('shipHitSuccess')
         compShips[0].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
@@ -1160,7 +1161,7 @@ function playerPick(e){
         // }
         computerMove()
       } else if (compShips[1].shipLocation.includes(e.target)){
-        e.target.classList.add('shipHit')
+        e.target.classList.add('shipHitSuccess')
         compShips[1].shipDamage += 1
         selectedSquaresPlayer.push(e.target)
         console.log(playerTurn)
@@ -1173,7 +1174,7 @@ function playerPick(e){
         // }
         computerMove()
       } else if (compShips[2].shipLocation.includes(e.target)){
-        e.target.classList.add('shipHit')
+        e.target.classList.add('shipHitSuccess')
         compShips[2].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
@@ -1186,7 +1187,7 @@ function playerPick(e){
         // }
         computerMove()
       } else if (compShips[3].shipLocation.includes(e.target)){
-        e.target.classList.add('shipHit')
+        e.target.classList.add('shipHitSuccess')
         compShips[3].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
@@ -1199,7 +1200,7 @@ function playerPick(e){
         // }
         computerMove()
       } else if (compShips[4].shipLocation.includes(e.target)){
-        e.target.classList.add('shipHit')
+        e.target.classList.add('shipHitSuccess')
         compShips[4].shipDamage += 1
         console.log(playerTurn)
         selectedSquaresPlayer.push(e.target)
@@ -1228,14 +1229,14 @@ function playerPick(e){
 
 
 
-if (compShipsHit === 13){
-  playerTurn = null
-  cellsPlayer.forEach(cell => cell.classList.add('shipHit'))
-  cellsComp.forEach(cell => cell.classList.add('shipHit'))
-} else if (playerShipsHit === 13){
-  playerTurn = null
-  cellsPlayer.forEach(cell => cell.classList.add('shipHit'))
-  cellsComp.forEach(cell => cell.classList.add('shipHit'))
-}
+// if (compShipsHit === 13){
+//   playerTurn = null
+//   cellsPlayer.forEach(cell => cell.classList.add('shipHit'))
+//   cellsComp.forEach(cell => cell.classList.add('shipHit'))
+// } else if (playerShipsHit === 13){
+//   playerTurn = null
+//   cellsPlayer.forEach(cell => cell.classList.add('shipHit'))
+//   cellsComp.forEach(cell => cell.classList.add('shipHit'))
+// }
 
 
