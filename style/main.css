@@ -6,12 +6,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 200px;
+  align-items: center;
+  margin-top: 100px;
 }
 .mainSegment {
   display: flex;
   justify-content:space-between;
-  width: 1000px;
+  width: 1100px;
   height: 400px;
 }
 
@@ -25,22 +26,23 @@ body {
 }
 
 #playerGrid div, #computerGrid div {
-  border: 1px solid lightskyblue;
+  border: 1.5px solid green;
   /* background-color: lightblue; */
+  opacity: 0.7;
   height: 10%;
   width: 10%;
 }
 
 #playerGrid {
-  background-color: cyan;
+  background-color: lightgreen;
   border: 20px solid slategray;
-  border-radius: 10px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 #computerGrid{
-  background-color: cyan;
+  background-color:lightgreen;
   border: 20px solid slategray;
-  border-radius: 10px;
+  border-radius: 10px 10px 0px 0px  ;
 }
 
 
@@ -49,12 +51,13 @@ body {
 }
 
 .selectedValid {
-  background-color: lightgreen;
+  background-color: lightgray;
 }
 
 .shipDeployed {
   background-color: green;
 }
+
 
 .selectedInvalid {
   background-color: red;
@@ -75,21 +78,118 @@ body {
   display: flex;
   justify-content: space-between;
   height: 200px;
-  width: 1000px;
+  width: 1100px;
   margin-top: 30px;
 }
 
 .playerShips {
   display: flex;
-  flex-direction: row;
-  border: 1px solid black;
+  justify-content: center;
+  border: 10px solid slategray;
   width: 400px;
+  padding: 10px;
+  border-radius: 0px 0px 10px 10px;
+  background-color: lightgreen;
 }
 
 .compShips {
   display: flex;
-  flex-direction: row;
-  border: 1px solid black;
+  justify-content: center;
+  border: 10px solid slategray;
   width: 400px;
+  padding: 10px;
+  border-radius: 0px 0px 10px 10px;
+  background-color: lightgreen;
 }
 
+.destroyeri {
+  width: 40px;
+  height: 120px;
+  background-color: darkgray;
+  margin-right: 10px;
+  border-radius: 18px 18px 10px 10px ;
+  border: 2px dashed lightgray;
+} 
+
+.destroyerTwoi {
+  width: 40px;
+  height: 120px;
+  background-color: darkgray;
+  margin-right: 10px;
+  border-radius: 18px 18px 10px 10px ;
+  border: 2px dashed lightgray;
+} 
+.carrieri {
+  width: 40px;
+  height: 160px;
+  background-color: darkgray;
+  margin-right: 10px;
+  border-radius: 10px 10px 10px 10px ;
+  border: 2px dashed lightgray;
+} 
+.cruiseri {
+  width: 40px;
+  height: 80px;
+  background-color: darkgray;
+  margin-right: 10px;
+  border-radius: 5px 5px 5px 5px ;
+  border: 2px dashed lightgray;
+} 
+.corvettei {
+  width: 40px;
+  height: 40px;
+  background-color: darkgray;
+  margin-right: 10px;
+  border-radius: 5px 5px 5px 5px ;
+  border: 2px dashed lightgray;
+} 
+
+
+/* button */
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 100px;
+  background-color: darkgrey;
+  border-radius: 30px; 
+}
+
+.button div {
+  display: flex;
+  justify-content: center;
+  background-color:darkred;
+  width: 80% ;
+  height: 70%;
+  border-radius: 20px;
+}
+
+.infoSquare {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: slategray;
+  height: 100%;
+  width: 250px;
+  padding: 20px;
+  margin: 0px 10px;
+  border-radius: 5px;
+}
+
+#shadow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  width: 100%;
+  height: 80%;
+  border-radius: 20px 20px 20px 20px;
+}
+
+#shadow h1{
+  font-size: 30px;
+  font-family: sans-serif;
+  color: white
+}
