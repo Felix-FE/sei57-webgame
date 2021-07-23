@@ -6,6 +6,8 @@ const armageddonAudio = document.getElementById('armageddon')
 const abandonShipAudio = document.getElementById('abandonShip')
 const shipPlacementAudio = document.getElementById('shipPlacement')
 const attemptAudio = document.getElementById('attempt')
+const fireOneAudio = document.getElementById('fireOne')
+const fireTwoAudio = document.getElementById('fireTwo')
 
 const instructionsText = document.getElementById('instructions')
 
@@ -1324,6 +1326,7 @@ function startGame() {
             compShipsHit += 1
             console.log(compShipsHit)
             destroyerC.style.backgroundColor = 'red'
+            fireTwoAudio.play()
             
           }
           setTimeout(computerMove, 1000)
@@ -1337,6 +1340,7 @@ function startGame() {
             compShipsHit += 1
             console.log(compShipsHit)
             destroyerTwoC.style.backgroundColor = 'red'
+            armageddonAudio.play()
               
           }
           setTimeout(computerMove, 1000)
@@ -1363,6 +1367,7 @@ function startGame() {
             compShipsHit += 1
             console.log(compShipsHit)
             cruiserC.style.backgroundColor = 'red'
+            fireOneAudio.play()
             
           }
           setTimeout(computerMove, 1000)
@@ -1393,10 +1398,6 @@ function startGame() {
       }
     }
 
-    if (compShipsHit === 2 && armageddonAudioPlay === true){
-      armageddonAudio.play()
-      armageddonAudioPlay = false
-    }
 
     if (compShipsHit === 5){
       playerTurn = null
