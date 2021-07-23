@@ -572,741 +572,744 @@ function startGame() {
   let foundShip = []
   let directionAttempt = 0
 
+  let computerMovei = true
 
   function computerMove(){
-    attemptAudio.play()
-    let canMove = false
-    let currentRand = null
+    if (computerMovei === true){
+      attemptAudio.play()
+      let canMove = false
+      let currentRand = null
 
-    while (canMove === false && selectedSquaresComp.length < 100){
-      currentRand = randSelectionPlayer()
-      console.log(currentRand)
-      if (selectedSquaresComp.includes(currentRand) === false){
-        canMove = true
-      }
-    } 
-    
-    if (previousMoveHit === false){
+      while (canMove === false && selectedSquaresComp.length < 100){
+        currentRand = randSelectionPlayer()
+        console.log(currentRand)
+        if (selectedSquaresComp.includes(currentRand) === false){
+          canMove = true
+        }
+      } 
+      
+      if (previousMoveHit === false){
 
-      // while (canMove === false && selectedSquaresComp.length < 100){
-      //   currentRand = randSelectionPlayer()
-      //   console.log(currentRand)
-      //   if (selectedSquaresComp.includes(currentRand) === false){
-      //     canMove = true
-      //   }
-      // }
-      if (currentRand.classList.contains('shipDeployed')){
-        selectedSquaresComp.push(currentRand)
-        currentRand.classList.add('shipHitSuccess')
-        currentRand.style.backgroundColor = 'red'
-        previousMoveHit = true
-        previousMoveComp = currentRand
-        foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Rvalue])
-        foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Dvalue])
-        foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Lvalue])
-        foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Uvalue])
-        console.log(`this is the set of selected: ${foundShip}`)
-        playerTurn = true
-        if (currentRand.classList.contains('destroyer')){
-          playerShips[0].shipDamage += 1
-          console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
-          if (playerShips[0].shipDamage === 3){
-            previousMoveHit = false
-            destroyerP.style.backgroundColor = 'red'
-            playerShipsHit += 1
-            abandonShipAudio.play()
-          }
-        } else if (currentRand.classList.contains('destroyertwo')){
-          playerShips[1].shipDamage += 1
-          console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
-          if (playerShips[1].shipDamage === 3){
-            previousMoveHit = false
-            destroyerTwoP.style.backgroundColor = 'red'
-            playerShipsHit += 1
-            abandonShipAudio.play()
-          }
-        } else if (currentRand.classList.contains('carrier')){
-          playerShips[2].shipDamage += 1
-          console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
-          if (playerShips[2].shipDamage === 4){
-            previousMoveHit = false
-            carrierP.style.backgroundColor = 'red'
-            playerShipsHit += 1
-            abandonShipAudio.play()
-          }
-        } else if (currentRand.classList.contains('cruiser')){
-          playerShips[3].shipDamage += 1
-          console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
-          if (playerShips[3].shipDamage === 2){
-            previousMoveHit = false
-            cruiserP.style.backgroundColor = 'red'
-            playerShipsHit += 1
-            abandonShipAudio.play()
-          }
-        }else if (currentRand.classList.contains('corvette')){
-          playerShips[4].shipDamage += 1
-          console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
-          if (playerShips[4].shipDamage === 1){
-            previousMoveHit = false
-            corvetteP.style.backgroundColor = 'red'
-            playerShipsHit += 1
-            abandonShipAudio.play()
-          }
+        // while (canMove === false && selectedSquaresComp.length < 100){
+        //   currentRand = randSelectionPlayer()
+        //   console.log(currentRand)
+        //   if (selectedSquaresComp.includes(currentRand) === false){
+        //     canMove = true
+        //   }
+        // }
+        if (currentRand.classList.contains('shipDeployed')){
+          selectedSquaresComp.push(currentRand)
+          currentRand.classList.add('shipHitSuccess')
+          currentRand.style.backgroundColor = 'red'
+          previousMoveHit = true
+          previousMoveComp = currentRand
+          foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Rvalue])
+          foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Dvalue])
+          foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Lvalue])
+          foundShip.push(cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Uvalue])
+          console.log(`this is the set of selected: ${foundShip}`)
+          playerTurn = true
+          if (currentRand.classList.contains('destroyer')){
+            playerShips[0].shipDamage += 1
+            console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+            if (playerShips[0].shipDamage === 3){
+              previousMoveHit = false
+              destroyerP.style.backgroundColor = 'red'
+              playerShipsHit += 1
+              abandonShipAudio.play()
+            }
+          } else if (currentRand.classList.contains('destroyertwo')){
+            playerShips[1].shipDamage += 1
+            console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+            if (playerShips[1].shipDamage === 3){
+              previousMoveHit = false
+              destroyerTwoP.style.backgroundColor = 'red'
+              playerShipsHit += 1
+              abandonShipAudio.play()
+            }
+          } else if (currentRand.classList.contains('carrier')){
+            playerShips[2].shipDamage += 1
+            console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+            if (playerShips[2].shipDamage === 4){
+              previousMoveHit = false
+              carrierP.style.backgroundColor = 'red'
+              playerShipsHit += 1
+              abandonShipAudio.play()
+            }
+          } else if (currentRand.classList.contains('cruiser')){
+            playerShips[3].shipDamage += 1
+            console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+            if (playerShips[3].shipDamage === 2){
+              previousMoveHit = false
+              cruiserP.style.backgroundColor = 'red'
+              playerShipsHit += 1
+              abandonShipAudio.play()
+            }
+          }else if (currentRand.classList.contains('corvette')){
+            playerShips[4].shipDamage += 1
+            console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+            if (playerShips[4].shipDamage === 1){
+              previousMoveHit = false
+              corvetteP.style.backgroundColor = 'red'
+              playerShipsHit += 1
+              abandonShipAudio.play()
+            }
 
+          }
+          
+        } else {
+          selectedSquaresComp.push(currentRand)
+          currentRand.classList.add('shipHit')
+          currentRand.style.backgroundColor = 'lightcoral'
+          playerTurn = true
+          canMove = false
+          directionAttempt = 0
+          foundShip = []
         }
         
-      } else {
-        selectedSquaresComp.push(currentRand)
-        currentRand.classList.add('shipHit')
-        currentRand.style.backgroundColor = 'lightcoral'
-        playerTurn = true
-        canMove = false
-        directionAttempt = 0
-        foundShip = []
-      }
-      
-    } else if (previousMoveHit === true) {
+      } else if (previousMoveHit === true) {
 
-      // while (canMove === false && selectedSquaresComp.length < 100){
-      //   currentRand = randSelectionPlayer()
-      //   console.log(currentRand)
-      //   if (selectedSquaresComp.includes(currentRand) === false){
-      //     canMove = true
-      //   }
-      // }
+        // while (canMove === false && selectedSquaresComp.length < 100){
+        //   currentRand = randSelectionPlayer()
+        //   console.log(currentRand)
+        //   if (selectedSquaresComp.includes(currentRand) === false){
+        //     canMove = true
+        //   }
+        // }
 
-      console.log('pooopy')
-      if (directionAttempt === 0){
+        console.log('pooopy')
+        if (directionAttempt === 0){
 
-        if (selectedSquaresComp.includes(foundShip[0]) === false && foundShip[0] !== undefined){
-          if (foundShip[0].classList.contains('shipDeployed')){
-            selectedSquaresComp.push(foundShip[0])
-            foundShip[0].classList.add('shipHitSuccess')
-            foundShip[0].style.backgroundColor = 'red'
-            previousMoveComp = foundShip[0]
-            playerTurn = true
-            directionAttempt = 1
-            previousMoveHit = true
-            if(foundShip[0].classList.contains('destroyer')){
-              playerShips[0].shipDamage += 1
-              console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
-              if (playerShips[0].shipDamage === 3){
-                previousMoveHit = false
-                destroyerP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
+          if (selectedSquaresComp.includes(foundShip[0]) === false && foundShip[0] !== undefined){
+            if (foundShip[0].classList.contains('shipDeployed')){
+              selectedSquaresComp.push(foundShip[0])
+              foundShip[0].classList.add('shipHitSuccess')
+              foundShip[0].style.backgroundColor = 'red'
+              previousMoveComp = foundShip[0]
+              playerTurn = true
+              directionAttempt = 1
+              previousMoveHit = true
+              if(foundShip[0].classList.contains('destroyer')){
+                playerShips[0].shipDamage += 1
+                console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+                if (playerShips[0].shipDamage === 3){
+                  previousMoveHit = false
+                  destroyerP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[0].classList.contains('destroyertwo')){
+                playerShips[1].shipDamage += 1
+                console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+                if (playerShips[1].shipDamage === 3){
+                  previousMoveHit = false
+                  destroyerTwoP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[0].classList.contains('carrier')){
+                playerShips[2].shipDamage += 1
+                console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+                if (playerShips[2].shipDamage === 4){
+                  previousMoveHit = false
+                  carrierP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[0].classList.contains('cruiser')){
+                playerShips[3].shipDamage += 1
+                console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+                if (playerShips[3].shipDamage === 2){
+                  previousMoveHit = false
+                  cruiserP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[0].classList.contains('corvette')){
+                playerShips[4].shipDamage += 1
+                console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+                if (playerShips[4].shipDamage === 1){
+                  previousMoveHit = false
+                  corvetteP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+        
               }
-            }else if (foundShip[0].classList.contains('destroyertwo')){
-              playerShips[1].shipDamage += 1
-              console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
-              if (playerShips[1].shipDamage === 3){
-                previousMoveHit = false
-                destroyerTwoP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[0].classList.contains('carrier')){
-              playerShips[2].shipDamage += 1
-              console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
-              if (playerShips[2].shipDamage === 4){
-                previousMoveHit = false
-                carrierP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[0].classList.contains('cruiser')){
-              playerShips[3].shipDamage += 1
-              console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
-              if (playerShips[3].shipDamage === 2){
-                previousMoveHit = false
-                cruiserP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[0].classList.contains('corvette')){
-              playerShips[4].shipDamage += 1
-              console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
-              if (playerShips[4].shipDamage === 1){
-                previousMoveHit = false
-                corvetteP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-      
+            } else {
+              selectedSquaresComp.push(foundShip[0])
+              foundShip[0].classList.add('shipHit')
+              foundShip[0].style.backgroundColor = 'lightcoral'
+              previousMoveComp = foundShip[0]
+              playerTurn = true
             }
+
+          } else if (selectedSquaresComp.includes(foundShip[1]) === false && foundShip[1] !== undefined){
+            if (foundShip[1].classList.contains('shipDeployed')){
+              selectedSquaresComp.push(foundShip[1])
+              foundShip[1].classList.add('shipHitSuccess')
+              foundShip[1].style.backgroundColor = 'red'
+              previousMoveComp = foundShip[1]
+              playerTurn = true
+              directionAttempt = 4
+              previousMoveHit = true
+              if(foundShip[1].classList.contains('destroyer')){
+                playerShips[0].shipDamage += 1
+                console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+                if (playerShips[0].shipDamage === 3){
+                  previousMoveHit = false
+                  destroyerP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[1].classList.contains('destroyertwo')){
+                playerShips[1].shipDamage += 1
+                console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+                if (playerShips[1].shipDamage === 3){
+                  previousMoveHit = false
+                  destroyerTwoP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[1].classList.contains('carrier')){
+                playerShips[2].shipDamage += 1
+                console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+                if (playerShips[2].shipDamage === 4){
+                  previousMoveHit = false
+                  carrierP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[1].classList.contains('cruiser')){
+                playerShips[3].shipDamage += 1
+                console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+                if (playerShips[3].shipDamage === 2){
+                  previousMoveHit = false
+                  cruiserP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[1].classList.contains('corvette')){
+                playerShips[4].shipDamage += 1
+                console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+                if (playerShips[4].shipDamage === 1){
+                  previousMoveHit = false
+                  corvetteP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+        
+              }
+            } else {
+              selectedSquaresComp.push(foundShip[1])
+              foundShip[1].classList.add('shipHit')
+              foundShip[1].style.backgroundColor = 'lightcoral'
+              previousMoveComp = foundShip[1]
+              playerTurn = true
+            }
+
+          } else if (selectedSquaresComp.includes(foundShip[2]) === false && foundShip[2] !== undefined){
+            if (foundShip[2].classList.contains('shipDeployed')){
+              selectedSquaresComp.push(foundShip[2])
+              foundShip[2].classList.add('shipHitSuccess')
+              foundShip[2].style.backgroundColor = 'red'
+              previousMoveComp = foundShip[2]
+              playerTurn = true
+              directionAttempt = 2
+              previousMoveHit = true
+              if(foundShip[2].classList.contains('destroyer')){
+                playerShips[0].shipDamage += 1
+                console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+                if (playerShips[0].shipDamage === 3){
+                  previousMoveHit = false
+                  destroyerP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[2].classList.contains('destroyertwo')){
+                playerShips[1].shipDamage += 1
+                console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+                if (playerShips[1].shipDamage === 3){
+                  previousMoveHit = false
+                  destroyerTwoP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[2].classList.contains('carrier')){
+                playerShips[2].shipDamage += 1
+                console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+                if (playerShips[2].shipDamage === 4){
+                  previousMoveHit = false
+                  carrierP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[2].classList.contains('cruiser')){
+                playerShips[3].shipDamage += 1
+                console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+                if (playerShips[3].shipDamage === 2){
+                  previousMoveHit = false
+                  cruiserP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[2].classList.contains('corvette')){
+                playerShips[4].shipDamage += 1
+                console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+                if (playerShips[4].shipDamage === 1){
+                  previousMoveHit = false
+                  corvetteP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+        
+              }
+            } else {
+              selectedSquaresComp.push(foundShip[2])
+              foundShip[2].classList.add('shipHit')
+              foundShip[2].style.backgroundColor = 'lightcoral'
+              previousMoveComp = foundShip[2]
+              playerTurn = true
+            }
+
+          } else if (selectedSquaresComp.includes(foundShip[3]) === false && foundShip[3] !== undefined){
+            if (foundShip[3].classList.contains('shipDeployed')){
+              selectedSquaresComp.push(foundShip[3])
+              foundShip[3].classList.add('shipHitSuccess')
+              foundShip[3].style.backgroundColor = 'red'
+              previousMoveComp = foundShip[3]
+              playerTurn = true
+              directionAttempt = 3
+              previousMoveHit = true
+              if(foundShip[3].classList.contains('destroyer')){
+                playerShips[0].shipDamage += 1
+                console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+                if (playerShips[0].shipDamage === 3){
+                  previousMoveHit = false
+                  destroyerP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[3].classList.contains('destroyertwo')){
+                playerShips[1].shipDamage += 1
+                console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+                if (playerShips[1].shipDamage === 3){
+                  previousMoveHit = false
+                  destroyerTwoP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[3].classList.contains('carrier')){
+                playerShips[2].shipDamage += 1
+                console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+                if (playerShips[2].shipDamage === 4){
+                  previousMoveHit = false
+                  carrierP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[3].classList.contains('cruiser')){
+                playerShips[3].shipDamage += 1
+                console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+                if (playerShips[3].shipDamage === 2){
+                  previousMoveHit = false
+                  cruiserP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (foundShip[3].classList.contains('corvette')){
+                playerShips[4].shipDamage += 1
+                console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+                if (playerShips[4].shipDamage === 1){
+                  previousMoveHit = false
+                  corvetteP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+        
+              }
+            } else {
+              selectedSquaresComp.push(foundShip[3])
+              foundShip[3].classList.add('shipHit')
+              foundShip[3].style.backgroundColor = 'lightcoral'
+              previousMoveComp = foundShip[3]
+              playerTurn = true
+            }
+
           } else {
-            selectedSquaresComp.push(foundShip[0])
-            foundShip[0].classList.add('shipHit')
-            foundShip[0].style.backgroundColor = 'lightcoral'
-            previousMoveComp = foundShip[0]
+            selectedSquaresComp.push(currentRand)
+            currentRand.classList.add('shipHit')
+            currentRand.style.backgroundColor = 'lightcoral'
             playerTurn = true
+            previousMoveComp = currentRand
+            previousMoveHit = false
+            foundShip = []
           }
-
-        } else if (selectedSquaresComp.includes(foundShip[1]) === false && foundShip[1] !== undefined){
-          if (foundShip[1].classList.contains('shipDeployed')){
-            selectedSquaresComp.push(foundShip[1])
-            foundShip[1].classList.add('shipHitSuccess')
-            foundShip[1].style.backgroundColor = 'red'
-            previousMoveComp = foundShip[1]
-            playerTurn = true
-            directionAttempt = 4
-            previousMoveHit = true
-            if(foundShip[1].classList.contains('destroyer')){
-              playerShips[0].shipDamage += 1
-              console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
-              if (playerShips[0].shipDamage === 3){
-                previousMoveHit = false
-                destroyerP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
+        } else if (directionAttempt === 1){
+          const nextValueR = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Rvalue]
+          if (selectedSquaresComp.includes(nextValueR) === false &&  nextValueR !== undefined){
+            if (nextValueR.classList.contains('shipDeployed')){
+              console.log('hello my lovelies')
+              selectedSquaresComp.push(nextValueR)
+              nextValueR.classList.add('shipHitSuccess')
+              nextValueR.style.backgroundColor = 'red'
+              previousMoveComp = nextValueR
+              playerTurn = true
+              previousMoveHit = true
+              if(nextValueR.classList.contains('destroyer')){
+                playerShips[0].shipDamage += 1
+                console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+                if (playerShips[0].shipDamage === 3){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  destroyerP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueR.classList.contains('destroyertwo')){
+                playerShips[1].shipDamage += 1
+                console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+                if (playerShips[1].shipDamage === 3){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  destroyerTwoP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueR.classList.contains('carrier')){
+                playerShips[2].shipDamage += 1
+                console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+                if (playerShips[2].shipDamage === 4){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  carrierP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueR.classList.contains('cruiser')){
+                playerShips[3].shipDamage += 1
+                console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+                if (playerShips[3].shipDamage === 2){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  cruiserP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueR.classList.contains('corvette')){
+                playerShips[4].shipDamage += 1
+                console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+                if (playerShips[4].shipDamage === 1){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  corvetteP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
               }
-            }else if (foundShip[1].classList.contains('destroyertwo')){
-              playerShips[1].shipDamage += 1
-              console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
-              if (playerShips[1].shipDamage === 3){
-                previousMoveHit = false
-                destroyerTwoP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[1].classList.contains('carrier')){
-              playerShips[2].shipDamage += 1
-              console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
-              if (playerShips[2].shipDamage === 4){
-                previousMoveHit = false
-                carrierP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[1].classList.contains('cruiser')){
-              playerShips[3].shipDamage += 1
-              console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
-              if (playerShips[3].shipDamage === 2){
-                previousMoveHit = false
-                cruiserP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[1].classList.contains('corvette')){
-              playerShips[4].shipDamage += 1
-              console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
-              if (playerShips[4].shipDamage === 1){
-                previousMoveHit = false
-                corvetteP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-      
+            } else {
+              console.log('cheese')
+              selectedSquaresComp.push(nextValueR)
+              nextValueR.classList.add('shipHit')
+              nextValueR.style.backgroundColor = 'lightcoral'
+              foundShip = []
+              directionAttempt = 0
+              previousMoveHit = false
+              playerTurn = true
             }
           } else {
-            selectedSquaresComp.push(foundShip[1])
-            foundShip[1].classList.add('shipHit')
-            foundShip[1].style.backgroundColor = 'lightcoral'
-            previousMoveComp = foundShip[1]
+            selectedSquaresComp.push(currentRand)
+            currentRand.classList.add('shipHit')
+            currentRand.style.backgroundColor = 'lightcoral'
             playerTurn = true
-          }
-
-        } else if (selectedSquaresComp.includes(foundShip[2]) === false && foundShip[2] !== undefined){
-          if (foundShip[2].classList.contains('shipDeployed')){
-            selectedSquaresComp.push(foundShip[2])
-            foundShip[2].classList.add('shipHitSuccess')
-            foundShip[2].style.backgroundColor = 'red'
-            previousMoveComp = foundShip[2]
-            playerTurn = true
-            directionAttempt = 2
-            previousMoveHit = true
-            if(foundShip[2].classList.contains('destroyer')){
-              playerShips[0].shipDamage += 1
-              console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
-              if (playerShips[0].shipDamage === 3){
-                previousMoveHit = false
-                destroyerP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[2].classList.contains('destroyertwo')){
-              playerShips[1].shipDamage += 1
-              console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
-              if (playerShips[1].shipDamage === 3){
-                previousMoveHit = false
-                destroyerTwoP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[2].classList.contains('carrier')){
-              playerShips[2].shipDamage += 1
-              console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
-              if (playerShips[2].shipDamage === 4){
-                previousMoveHit = false
-                carrierP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[2].classList.contains('cruiser')){
-              playerShips[3].shipDamage += 1
-              console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
-              if (playerShips[3].shipDamage === 2){
-                previousMoveHit = false
-                cruiserP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[2].classList.contains('corvette')){
-              playerShips[4].shipDamage += 1
-              console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
-              if (playerShips[4].shipDamage === 1){
-                previousMoveHit = false
-                corvetteP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-      
-            }
-          } else {
-            selectedSquaresComp.push(foundShip[2])
-            foundShip[2].classList.add('shipHit')
-            foundShip[2].style.backgroundColor = 'lightcoral'
-            previousMoveComp = foundShip[2]
-            playerTurn = true
-          }
-
-        } else if (selectedSquaresComp.includes(foundShip[3]) === false && foundShip[3] !== undefined){
-          if (foundShip[3].classList.contains('shipDeployed')){
-            selectedSquaresComp.push(foundShip[3])
-            foundShip[3].classList.add('shipHitSuccess')
-            foundShip[3].style.backgroundColor = 'red'
-            previousMoveComp = foundShip[3]
-            playerTurn = true
-            directionAttempt = 3
-            previousMoveHit = true
-            if(foundShip[3].classList.contains('destroyer')){
-              playerShips[0].shipDamage += 1
-              console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
-              if (playerShips[0].shipDamage === 3){
-                previousMoveHit = false
-                destroyerP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[3].classList.contains('destroyertwo')){
-              playerShips[1].shipDamage += 1
-              console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
-              if (playerShips[1].shipDamage === 3){
-                previousMoveHit = false
-                destroyerTwoP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[3].classList.contains('carrier')){
-              playerShips[2].shipDamage += 1
-              console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
-              if (playerShips[2].shipDamage === 4){
-                previousMoveHit = false
-                carrierP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[3].classList.contains('cruiser')){
-              playerShips[3].shipDamage += 1
-              console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
-              if (playerShips[3].shipDamage === 2){
-                previousMoveHit = false
-                cruiserP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (foundShip[3].classList.contains('corvette')){
-              playerShips[4].shipDamage += 1
-              console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
-              if (playerShips[4].shipDamage === 1){
-                previousMoveHit = false
-                corvetteP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-      
-            }
-          } else {
-            selectedSquaresComp.push(foundShip[3])
-            foundShip[3].classList.add('shipHit')
-            foundShip[3].style.backgroundColor = 'lightcoral'
-            previousMoveComp = foundShip[3]
-            playerTurn = true
-          }
-
-        } else {
-          selectedSquaresComp.push(currentRand)
-          currentRand.classList.add('shipHit')
-          currentRand.style.backgroundColor = 'lightcoral'
-          playerTurn = true
-          previousMoveComp = currentRand
-          previousMoveHit = false
-          foundShip = []
-        }
-      } else if (directionAttempt === 1){
-        const nextValueR = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Rvalue]
-        if (selectedSquaresComp.includes(nextValueR) === false &&  nextValueR !== undefined){
-          if (nextValueR.classList.contains('shipDeployed')){
-            console.log('hello my lovelies')
-            selectedSquaresComp.push(nextValueR)
-            nextValueR.classList.add('shipHitSuccess')
-            nextValueR.style.backgroundColor = 'red'
-            previousMoveComp = nextValueR
-            playerTurn = true
-            previousMoveHit = true
-            if(nextValueR.classList.contains('destroyer')){
-              playerShips[0].shipDamage += 1
-              console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
-              if (playerShips[0].shipDamage === 3){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                destroyerP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueR.classList.contains('destroyertwo')){
-              playerShips[1].shipDamage += 1
-              console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
-              if (playerShips[1].shipDamage === 3){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                destroyerTwoP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueR.classList.contains('carrier')){
-              playerShips[2].shipDamage += 1
-              console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
-              if (playerShips[2].shipDamage === 4){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                carrierP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueR.classList.contains('cruiser')){
-              playerShips[3].shipDamage += 1
-              console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
-              if (playerShips[3].shipDamage === 2){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                cruiserP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueR.classList.contains('corvette')){
-              playerShips[4].shipDamage += 1
-              console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
-              if (playerShips[4].shipDamage === 1){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                corvetteP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }
-          } else {
-            console.log('cheese')
-            selectedSquaresComp.push(nextValueR)
-            nextValueR.classList.add('shipHit')
-            nextValueR.style.backgroundColor = 'lightcoral'
+            previousMoveComp = currentRand
+            previousMoveHit = false
             foundShip = []
             directionAttempt = 0
-            previousMoveHit = false
-            playerTurn = true
           }
-        } else {
-          selectedSquaresComp.push(currentRand)
-          currentRand.classList.add('shipHit')
-          currentRand.style.backgroundColor = 'lightcoral'
-          playerTurn = true
-          previousMoveComp = currentRand
-          previousMoveHit = false
-          foundShip = []
-          directionAttempt = 0
-        }
-      } else if (directionAttempt === 2){
-        const nextValueL = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Lvalue]
-        if (selectedSquaresComp.includes(nextValueL) === false &&  nextValueL !== undefined){
-          if (nextValueL.classList.contains('shipDeployed')){
-            console.log('hello my lovelies')
-            selectedSquaresComp.push(nextValueL)
-            nextValueL.classList.add('shipHitSuccess')
-            nextValueL.style.backgroundColor = 'red'
-            previousMoveComp = nextValueL
-            playerTurn = true
-            previousMoveHit = true
-            if(nextValueL.classList.contains('destroyer')){
-              playerShips[0].shipDamage += 1
-              console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
-              if (playerShips[0].shipDamage === 3){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                destroyerP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
+        } else if (directionAttempt === 2){
+          const nextValueL = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Lvalue]
+          if (selectedSquaresComp.includes(nextValueL) === false &&  nextValueL !== undefined){
+            if (nextValueL.classList.contains('shipDeployed')){
+              console.log('hello my lovelies')
+              selectedSquaresComp.push(nextValueL)
+              nextValueL.classList.add('shipHitSuccess')
+              nextValueL.style.backgroundColor = 'red'
+              previousMoveComp = nextValueL
+              playerTurn = true
+              previousMoveHit = true
+              if(nextValueL.classList.contains('destroyer')){
+                playerShips[0].shipDamage += 1
+                console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+                if (playerShips[0].shipDamage === 3){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  destroyerP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueL.classList.contains('destroyertwo')){
+                playerShips[1].shipDamage += 1
+                console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+                if (playerShips[1].shipDamage === 3){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  destroyerTwoP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueL.classList.contains('carrier')){
+                playerShips[2].shipDamage += 1
+                console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+                if (playerShips[2].shipDamage === 4){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  carrierP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueL.classList.contains('cruiser')){
+                playerShips[3].shipDamage += 1
+                console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+                if (playerShips[3].shipDamage === 2){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  cruiserP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueL.classList.contains('corvette')){
+                playerShips[4].shipDamage += 1
+                console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+                if (playerShips[4].shipDamage === 1){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  corvetteP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
               }
-            }else if (nextValueL.classList.contains('destroyertwo')){
-              playerShips[1].shipDamage += 1
-              console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
-              if (playerShips[1].shipDamage === 3){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                destroyerTwoP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueL.classList.contains('carrier')){
-              playerShips[2].shipDamage += 1
-              console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
-              if (playerShips[2].shipDamage === 4){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                carrierP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueL.classList.contains('cruiser')){
-              playerShips[3].shipDamage += 1
-              console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
-              if (playerShips[3].shipDamage === 2){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                cruiserP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueL.classList.contains('corvette')){
-              playerShips[4].shipDamage += 1
-              console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
-              if (playerShips[4].shipDamage === 1){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                corvetteP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
+            } else {
+              console.log('cheese')
+              selectedSquaresComp.push(nextValueL)
+              nextValueL.classList.add('shipHit')
+              nextValueL.style.backgroundColor = 'lightcoral'
+              foundShip = []
+              directionAttempt = 0
+              previousMoveHit = false
+              playerTurn = true
             }
           } else {
-            console.log('cheese')
-            selectedSquaresComp.push(nextValueL)
-            nextValueL.classList.add('shipHit')
-            nextValueL.style.backgroundColor = 'lightcoral'
+            selectedSquaresComp.push(currentRand)
+            currentRand.classList.add('shipHit')
+            currentRand.style.backgroundColor = 'lightcoral'
+            playerTurn = true
+            previousMoveHit = false
+            previousMoveComp = currentRand
             foundShip = []
             directionAttempt = 0
-            previousMoveHit = false
-            playerTurn = true
           }
-        } else {
-          selectedSquaresComp.push(currentRand)
-          currentRand.classList.add('shipHit')
-          currentRand.style.backgroundColor = 'lightcoral'
-          playerTurn = true
-          previousMoveHit = false
-          previousMoveComp = currentRand
-          foundShip = []
-          directionAttempt = 0
-        }
 
-      } else if (directionAttempt === 3){
-        const nextValueU = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Uvalue]
-        if (selectedSquaresComp.includes(nextValueU) === false &&  nextValueU !== undefined){
-          if (nextValueU.classList.contains('shipDeployed')){
-            console.log('hello my lovelies')
-            selectedSquaresComp.push(nextValueU)
-            nextValueU.classList.add('shipHitSuccess')
-            nextValueU.style.backgroundColor = 'red'
-            previousMoveComp = nextValueU
-            playerTurn = true
-            previousMoveHit = true
-            if(nextValueU.classList.contains('destroyer')){
-              playerShips[0].shipDamage += 1
-              console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
-              if (playerShips[0].shipDamage === 3){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                destroyerP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
+        } else if (directionAttempt === 3){
+          const nextValueU = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Uvalue]
+          if (selectedSquaresComp.includes(nextValueU) === false &&  nextValueU !== undefined){
+            if (nextValueU.classList.contains('shipDeployed')){
+              console.log('hello my lovelies')
+              selectedSquaresComp.push(nextValueU)
+              nextValueU.classList.add('shipHitSuccess')
+              nextValueU.style.backgroundColor = 'red'
+              previousMoveComp = nextValueU
+              playerTurn = true
+              previousMoveHit = true
+              if(nextValueU.classList.contains('destroyer')){
+                playerShips[0].shipDamage += 1
+                console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+                if (playerShips[0].shipDamage === 3){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  destroyerP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueU.classList.contains('destroyertwo')){
+                playerShips[1].shipDamage += 1
+                console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+                if (playerShips[1].shipDamage === 3){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  destroyerTwoP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueU.classList.contains('carrier')){
+                playerShips[2].shipDamage += 1
+                console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+                if (playerShips[2].shipDamage === 4){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  carrierP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueU.classList.contains('cruiser')){
+                playerShips[3].shipDamage += 1
+                console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+                if (playerShips[3].shipDamage === 2){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  cruiserP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueU.classList.contains('corvette')){
+                playerShips[4].shipDamage += 1
+                console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+                if (playerShips[4].shipDamage === 1){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  corvetteP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
               }
-            }else if (nextValueU.classList.contains('destroyertwo')){
-              playerShips[1].shipDamage += 1
-              console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
-              if (playerShips[1].shipDamage === 3){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                destroyerTwoP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueU.classList.contains('carrier')){
-              playerShips[2].shipDamage += 1
-              console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
-              if (playerShips[2].shipDamage === 4){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                carrierP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueU.classList.contains('cruiser')){
-              playerShips[3].shipDamage += 1
-              console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
-              if (playerShips[3].shipDamage === 2){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                cruiserP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueU.classList.contains('corvette')){
-              playerShips[4].shipDamage += 1
-              console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
-              if (playerShips[4].shipDamage === 1){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                corvetteP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
+            } else {
+              console.log('cheese')
+              selectedSquaresComp.push(nextValueU)
+              nextValueU.classList.add('shipHit')
+              nextValueU.style.backgroundColor = 'lightcoral'
+              foundShip = []
+              directionAttempt = 0
+              previousMoveHit = false
+              playerTurn = true
             }
           } else {
-            console.log('cheese')
-            selectedSquaresComp.push(nextValueU)
-            nextValueU.classList.add('shipHit')
-            nextValueU.style.backgroundColor = 'lightcoral'
+            selectedSquaresComp.push(currentRand)
+            currentRand.classList.add('shipHit')
+            currentRand.style.backgroundColor = 'lightcoral'
+            playerTurn = true
+            previousMoveHit = false
+            previousMoveComp = currentRand
             foundShip = []
             directionAttempt = 0
-            previousMoveHit = false
-            playerTurn = true
           }
-        } else {
-          selectedSquaresComp.push(currentRand)
-          currentRand.classList.add('shipHit')
-          currentRand.style.backgroundColor = 'lightcoral'
-          playerTurn = true
-          previousMoveHit = false
-          previousMoveComp = currentRand
-          foundShip = []
-          directionAttempt = 0
-        }
 
-      } else if (directionAttempt === 4){
-        const nextValueD = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Dvalue]
-        if (selectedSquaresComp.includes(nextValueD) === false  &&  nextValueD !== undefined){
-          if (nextValueD.classList.contains('shipDeployed')){
-            console.log('hello my lovelies')
-            selectedSquaresComp.push(nextValueD)
-            nextValueD.classList.add('shipHitSuccess')
-            nextValueD.style.backgroundColor = 'red'
-            previousMoveComp = nextValueD
-            playerTurn = true
-            previousMoveHit = true
-            if(nextValueD.classList.contains('destroyer')){
-              playerShips[0].shipDamage += 1
-              console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
-              if (playerShips[0].shipDamage === 3){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                destroyerP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
+        } else if (directionAttempt === 4){
+          const nextValueD = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Dvalue]
+          if (selectedSquaresComp.includes(nextValueD) === false  &&  nextValueD !== undefined){
+            if (nextValueD.classList.contains('shipDeployed')){
+              console.log('hello my lovelies')
+              selectedSquaresComp.push(nextValueD)
+              nextValueD.classList.add('shipHitSuccess')
+              nextValueD.style.backgroundColor = 'red'
+              previousMoveComp = nextValueD
+              playerTurn = true
+              previousMoveHit = true
+              if(nextValueD.classList.contains('destroyer')){
+                playerShips[0].shipDamage += 1
+                console.log(`the destroyer damage is: ${playerShips[0].shipDamage}`)
+                if (playerShips[0].shipDamage === 3){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  destroyerP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueD.classList.contains('destroyertwo')){
+                playerShips[1].shipDamage += 1
+                console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
+                if (playerShips[1].shipDamage === 3){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  destroyerTwoP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueD.classList.contains('carrier')){
+                playerShips[2].shipDamage += 1
+                console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
+                if (playerShips[2].shipDamage === 4){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  carrierP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueD.classList.contains('cruiser')){
+                playerShips[3].shipDamage += 1
+                console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
+                if (playerShips[3].shipDamage === 2){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  cruiserP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+              }else if (nextValueD.classList.contains('corvette')){
+                playerShips[4].shipDamage += 1
+                console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
+                if (playerShips[4].shipDamage === 1){
+                  previousMoveHit = false
+                  directionAttempt = 0
+                  foundShip = []
+                  corvetteP.style.backgroundColor = 'red'
+                  playerShipsHit += 1
+                  abandonShipAudio.play()
+                }
+        
               }
-            }else if (nextValueD.classList.contains('destroyertwo')){
-              playerShips[1].shipDamage += 1
-              console.log(`the destroyertwo damage is: ${playerShips[1].shipDamage}`)
-              if (playerShips[1].shipDamage === 3){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                destroyerTwoP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueD.classList.contains('carrier')){
-              playerShips[2].shipDamage += 1
-              console.log(`the carrier damage is: ${playerShips[2].shipDamage}`)
-              if (playerShips[2].shipDamage === 4){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                carrierP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueD.classList.contains('cruiser')){
-              playerShips[3].shipDamage += 1
-              console.log(`the cruiser damage is: ${playerShips[3].shipDamage}`)
-              if (playerShips[3].shipDamage === 2){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                cruiserP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-            }else if (nextValueD.classList.contains('corvette')){
-              playerShips[4].shipDamage += 1
-              console.log(`the corvette damage is: ${playerShips[4].shipDamage}`)
-              if (playerShips[4].shipDamage === 1){
-                previousMoveHit = false
-                directionAttempt = 0
-                foundShip = []
-                corvetteP.style.backgroundColor = 'red'
-                playerShipsHit += 1
-                abandonShipAudio.play()
-              }
-      
+            } else {
+              console.log('cheese')
+              selectedSquaresComp.push(nextValueD)
+              nextValueD.classList.add('shipHit')
+              nextValueD.style.backgroundColor = 'lightcoral'
+              foundShip = []
+              directionAttempt = 0
+              previousMoveHit = false
+              playerTurn = true
             }
           } else {
-            console.log('cheese')
-            selectedSquaresComp.push(nextValueD)
-            nextValueD.classList.add('shipHit')
-            nextValueD.style.backgroundColor = 'lightcoral'
+            selectedSquaresComp.push(currentRand)
+            currentRand.classList.add('shipHit')
+            currentRand.style.backgroundColor = 'lightcoral'
+            playerTurn = true
+            previousMoveHit = false
+            previousMoveComp = currentRand
             foundShip = []
             directionAttempt = 0
-            previousMoveHit = false
-            playerTurn = true
           }
-        } else {
-          selectedSquaresComp.push(currentRand)
-          currentRand.classList.add('shipHit')
-          currentRand.style.backgroundColor = 'lightcoral'
-          playerTurn = true
-          previousMoveHit = false
-          previousMoveComp = currentRand
-          foundShip = []
-          directionAttempt = 0
+
         }
 
       }
-
-    }
-    if (playerShipsHit === 5){
-      playerTurn = null
-      cellsPlayer.forEach(cell => cell.style.backgroundColor = 'red')
-      cellsComp.forEach(cell => cell.style.backgroundColor = 'green')
-      instructionsText.innerText = 'YOU LOSE!!! Press reset to start again'
-    }
-    console.log(previousMoveHit)
-    console.log(foundShip)
-    console.log(directionAttempt)
+      if (playerShipsHit === 5){
+        playerTurn = null
+        cellsPlayer.forEach(cell => cell.style.backgroundColor = 'red')
+        cellsComp.forEach(cell => cell.style.backgroundColor = 'green')
+        instructionsText.innerText = 'YOU LOSE!!! Press reset to start again'
+      }
+      console.log(previousMoveHit)
+      console.log(foundShip)
+      console.log(directionAttempt)
+    }  
   }
 
 
@@ -1400,10 +1403,12 @@ function startGame() {
 
 
     if (compShipsHit === 5){
+      computerMovei = false
       playerTurn = null
       cellsPlayer.forEach(cell => cell.style.backgroundColor = 'green')
       cellsComp.forEach(cell => cell.style.backgroundColor = 'red')
       instructionsText.innerText = 'YOU WIN!!! Press reset to start again'
+      
     }
   }
 
