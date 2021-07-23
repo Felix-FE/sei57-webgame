@@ -1,6 +1,14 @@
 // VARIABLES
 
 // Element collector
+const periscopeAudio = document.getElementById('periscope')
+const armageddonAudio = document.getElementById('armageddon')
+const abandonShipAudio = document.getElementById('abandonShip')
+const shipPlacementAudio = document.getElementById('shipPlacement')
+const attemptAudio = document.getElementById('attempt')
+
+const instructionsText = document.getElementById('instructions')
+
 const carrierP = document.querySelector('.playerShips .carrieri')
 const carrierC = document.querySelector('.compShips .carrieri')
 
@@ -24,6 +32,9 @@ const startButtonText = document.querySelector('#shadow h1')
 
 const cellsPlayer = []
 const cellsComp = []
+
+
+instructionsText.innerText = 'Press start to begin the game'
 
 const playerShips = [
   {
@@ -187,22 +198,22 @@ const totalCells = cellWidth * cellWidth
 function createGrid() {
   for (let i = 0; i < totalCells; i++){
     const gridCell = document.createElement('div')
-    const cellIndex = document.createElement('h1')
-    const cellText = document.createTextNode(i)
+    // const cellIndex = document.createElement('h1')
+    // const cellText = document.createTextNode(i)
     gridCell.setAttribute('value', i)
-    cellIndex.appendChild(cellText)
+    // cellIndex.appendChild(cellText)
     gridP.appendChild(gridCell)
-    gridCell.appendChild(cellIndex)
+    // gridCell.appendChild(cellIndex)
     cellsPlayer.push(gridCell)
 
 
     const gridCellComp = document.createElement('div')
-    const cellIndexComp = document.createElement('h1')
-    const cellTextComp = document.createTextNode(i)
+    // const cellIndexComp = document.createElement('h1')
+    // const cellTextComp = document.createTextNode(i)
     gridCellComp.setAttribute('value', i)
-    cellIndexComp.appendChild(cellTextComp)
+    // cellIndexComp.appendChild(cellTextComp)
     gridC.appendChild(gridCellComp)
-    gridCellComp.appendChild(cellIndexComp)
+    // gridCellComp.appendChild(cellIndexComp)
     cellsComp.push(gridCellComp)
   }
 
@@ -279,8 +290,12 @@ let selectionSetComp = []
 
 const invalidCellsComp = []
 
+let armageddonAudioPlay = true
+
 
 function startGame() {
+
+  instructionsText.innerText = 'Use your mouse to place your ships. Press R to rotate the ship. right-click to lay a ship.'
 
   startButton.removeEventListener('click', startGame)
 
@@ -294,8 +309,11 @@ function startGame() {
     location.reload()
   }
 
+  
 
   function playerSelection(e){
+
+    
     
     selectionSet.forEach(cell => {
       if (cell !== undefined){ 
@@ -409,13 +427,17 @@ function startGame() {
         cell.classList.add('shipDeployed')
         cell.style.backgroundColor = 'darkgrey'
         cell.classList.add(String(shipType[shipTypeCount]))
+        shipPlacementAudio.play()
       })
       shipTypeCount += 1
       shipIndex += 1
       if (shipIndex === 5){
+        cellsPlayer.forEach(cell => cell.removeEventListener('mouseover', playerSelection))
         console.log('you are ready')
+        periscopeAudio.play()
         cellsComp.forEach(cell => cell.addEventListener('click',playerPick))
         playerTurn  = true
+        instructionsText.innerText = 'Click on the Computer screen to take your shot'
       }
     }
   } 
@@ -521,6 +543,7 @@ function startGame() {
   }
 
   computerSelection()
+  
 
   let playerTurn = null
 
@@ -549,6 +572,7 @@ function startGame() {
 
 
   function computerMove(){
+    attemptAudio.play()
     let canMove = false
     let currentRand = null
 
@@ -588,6 +612,7 @@ function startGame() {
             previousMoveHit = false
             destroyerP.style.backgroundColor = 'red'
             playerShipsHit += 1
+            abandonShipAudio.play()
           }
         } else if (currentRand.classList.contains('destroyertwo')){
           playerShips[1].shipDamage += 1
@@ -596,6 +621,7 @@ function startGame() {
             previousMoveHit = false
             destroyerTwoP.style.backgroundColor = 'red'
             playerShipsHit += 1
+            abandonShipAudio.play()
           }
         } else if (currentRand.classList.contains('carrier')){
           playerShips[2].shipDamage += 1
@@ -604,6 +630,7 @@ function startGame() {
             previousMoveHit = false
             carrierP.style.backgroundColor = 'red'
             playerShipsHit += 1
+            abandonShipAudio.play()
           }
         } else if (currentRand.classList.contains('cruiser')){
           playerShips[3].shipDamage += 1
@@ -612,6 +639,7 @@ function startGame() {
             previousMoveHit = false
             cruiserP.style.backgroundColor = 'red'
             playerShipsHit += 1
+            abandonShipAudio.play()
           }
         }else if (currentRand.classList.contains('corvette')){
           playerShips[4].shipDamage += 1
@@ -620,6 +648,7 @@ function startGame() {
             previousMoveHit = false
             corvetteP.style.backgroundColor = 'red'
             playerShipsHit += 1
+            abandonShipAudio.play()
           }
 
         }
@@ -663,6 +692,7 @@ function startGame() {
                 previousMoveHit = false
                 destroyerP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[0].classList.contains('destroyertwo')){
               playerShips[1].shipDamage += 1
@@ -671,6 +701,7 @@ function startGame() {
                 previousMoveHit = false
                 destroyerTwoP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[0].classList.contains('carrier')){
               playerShips[2].shipDamage += 1
@@ -679,6 +710,7 @@ function startGame() {
                 previousMoveHit = false
                 carrierP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[0].classList.contains('cruiser')){
               playerShips[3].shipDamage += 1
@@ -687,6 +719,7 @@ function startGame() {
                 previousMoveHit = false
                 cruiserP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[0].classList.contains('corvette')){
               playerShips[4].shipDamage += 1
@@ -695,6 +728,7 @@ function startGame() {
                 previousMoveHit = false
                 corvetteP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
       
             }
@@ -722,6 +756,7 @@ function startGame() {
                 previousMoveHit = false
                 destroyerP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[1].classList.contains('destroyertwo')){
               playerShips[1].shipDamage += 1
@@ -730,6 +765,7 @@ function startGame() {
                 previousMoveHit = false
                 destroyerTwoP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[1].classList.contains('carrier')){
               playerShips[2].shipDamage += 1
@@ -738,6 +774,7 @@ function startGame() {
                 previousMoveHit = false
                 carrierP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[1].classList.contains('cruiser')){
               playerShips[3].shipDamage += 1
@@ -746,6 +783,7 @@ function startGame() {
                 previousMoveHit = false
                 cruiserP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[1].classList.contains('corvette')){
               playerShips[4].shipDamage += 1
@@ -754,6 +792,7 @@ function startGame() {
                 previousMoveHit = false
                 corvetteP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
       
             }
@@ -781,6 +820,7 @@ function startGame() {
                 previousMoveHit = false
                 destroyerP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[2].classList.contains('destroyertwo')){
               playerShips[1].shipDamage += 1
@@ -789,6 +829,7 @@ function startGame() {
                 previousMoveHit = false
                 destroyerTwoP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[2].classList.contains('carrier')){
               playerShips[2].shipDamage += 1
@@ -797,6 +838,7 @@ function startGame() {
                 previousMoveHit = false
                 carrierP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[2].classList.contains('cruiser')){
               playerShips[3].shipDamage += 1
@@ -805,6 +847,7 @@ function startGame() {
                 previousMoveHit = false
                 cruiserP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[2].classList.contains('corvette')){
               playerShips[4].shipDamage += 1
@@ -813,6 +856,7 @@ function startGame() {
                 previousMoveHit = false
                 corvetteP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
       
             }
@@ -840,6 +884,7 @@ function startGame() {
                 previousMoveHit = false
                 destroyerP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[3].classList.contains('destroyertwo')){
               playerShips[1].shipDamage += 1
@@ -848,6 +893,7 @@ function startGame() {
                 previousMoveHit = false
                 destroyerTwoP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[3].classList.contains('carrier')){
               playerShips[2].shipDamage += 1
@@ -856,6 +902,7 @@ function startGame() {
                 previousMoveHit = false
                 carrierP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[3].classList.contains('cruiser')){
               playerShips[3].shipDamage += 1
@@ -864,6 +911,7 @@ function startGame() {
                 previousMoveHit = false
                 cruiserP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (foundShip[3].classList.contains('corvette')){
               playerShips[4].shipDamage += 1
@@ -872,6 +920,7 @@ function startGame() {
                 previousMoveHit = false
                 corvetteP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
       
             }
@@ -912,6 +961,7 @@ function startGame() {
                 foundShip = []
                 destroyerP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueR.classList.contains('destroyertwo')){
               playerShips[1].shipDamage += 1
@@ -922,6 +972,7 @@ function startGame() {
                 foundShip = []
                 destroyerTwoP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueR.classList.contains('carrier')){
               playerShips[2].shipDamage += 1
@@ -932,6 +983,7 @@ function startGame() {
                 foundShip = []
                 carrierP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueR.classList.contains('cruiser')){
               playerShips[3].shipDamage += 1
@@ -942,6 +994,7 @@ function startGame() {
                 foundShip = []
                 cruiserP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueR.classList.contains('corvette')){
               playerShips[4].shipDamage += 1
@@ -952,6 +1005,7 @@ function startGame() {
                 foundShip = []
                 corvetteP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }
           } else {
@@ -994,6 +1048,7 @@ function startGame() {
                 foundShip = []
                 destroyerP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueL.classList.contains('destroyertwo')){
               playerShips[1].shipDamage += 1
@@ -1004,6 +1059,7 @@ function startGame() {
                 foundShip = []
                 destroyerTwoP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueL.classList.contains('carrier')){
               playerShips[2].shipDamage += 1
@@ -1014,6 +1070,7 @@ function startGame() {
                 foundShip = []
                 carrierP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueL.classList.contains('cruiser')){
               playerShips[3].shipDamage += 1
@@ -1024,6 +1081,7 @@ function startGame() {
                 foundShip = []
                 cruiserP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueL.classList.contains('corvette')){
               playerShips[4].shipDamage += 1
@@ -1034,6 +1092,7 @@ function startGame() {
                 foundShip = []
                 corvetteP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }
           } else {
@@ -1077,6 +1136,7 @@ function startGame() {
                 foundShip = []
                 destroyerP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueU.classList.contains('destroyertwo')){
               playerShips[1].shipDamage += 1
@@ -1087,6 +1147,7 @@ function startGame() {
                 foundShip = []
                 destroyerTwoP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueU.classList.contains('carrier')){
               playerShips[2].shipDamage += 1
@@ -1097,6 +1158,7 @@ function startGame() {
                 foundShip = []
                 carrierP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueU.classList.contains('cruiser')){
               playerShips[3].shipDamage += 1
@@ -1107,6 +1169,7 @@ function startGame() {
                 foundShip = []
                 cruiserP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueU.classList.contains('corvette')){
               playerShips[4].shipDamage += 1
@@ -1117,6 +1180,7 @@ function startGame() {
                 foundShip = []
                 corvetteP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }
           } else {
@@ -1160,6 +1224,7 @@ function startGame() {
                 foundShip = []
                 destroyerP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueD.classList.contains('destroyertwo')){
               playerShips[1].shipDamage += 1
@@ -1170,6 +1235,7 @@ function startGame() {
                 foundShip = []
                 destroyerTwoP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueD.classList.contains('carrier')){
               playerShips[2].shipDamage += 1
@@ -1180,6 +1246,7 @@ function startGame() {
                 foundShip = []
                 carrierP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueD.classList.contains('cruiser')){
               playerShips[3].shipDamage += 1
@@ -1190,6 +1257,7 @@ function startGame() {
                 foundShip = []
                 cruiserP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
             }else if (nextValueD.classList.contains('corvette')){
               playerShips[4].shipDamage += 1
@@ -1200,6 +1268,7 @@ function startGame() {
                 foundShip = []
                 corvetteP.style.backgroundColor = 'red'
                 playerShipsHit += 1
+                abandonShipAudio.play()
               }
       
             }
@@ -1231,6 +1300,7 @@ function startGame() {
       playerTurn = null
       cellsPlayer.forEach(cell => cell.style.backgroundColor = 'red')
       cellsComp.forEach(cell => cell.style.backgroundColor = 'green')
+      instructionsText.innerText = 'YOU LOSE!!! Press reset to start again'
     }
     console.log(previousMoveHit)
     console.log(foundShip)
@@ -1241,6 +1311,7 @@ function startGame() {
 
 
   function playerPick(e){
+    attemptAudio.play()
     if (selectedSquaresPlayer.includes(e.target) === false){
       if (playerTurn === true){
         if (compShips[0].shipLocation.includes(e.target)){
@@ -1322,10 +1393,16 @@ function startGame() {
       }
     }
 
+    if (compShipsHit === 2 && armageddonAudioPlay === true){
+      armageddonAudio.play()
+      armageddonAudioPlay = false
+    }
+
     if (compShipsHit === 5){
       playerTurn = null
       cellsPlayer.forEach(cell => cell.style.backgroundColor = 'green')
       cellsComp.forEach(cell => cell.style.backgroundColor = 'red')
+      instructionsText.innerText = 'YOU WIN!!! Press reset to start again'
     }
   }
 
