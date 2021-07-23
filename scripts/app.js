@@ -292,7 +292,6 @@ let selectionSetComp = []
 
 const invalidCellsComp = []
 
-let armageddonAudioPlay = true
 
 
 function startGame() {
@@ -677,7 +676,7 @@ function startGame() {
         //   }
         // }
 
-        console.log('pooopy')
+        
         if (directionAttempt === 0){
 
           if (selectedSquaresComp.includes(foundShip[0]) === false && foundShip[0] !== undefined){
@@ -949,7 +948,7 @@ function startGame() {
           const nextValueR = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Rvalue]
           if (selectedSquaresComp.includes(nextValueR) === false &&  nextValueR !== undefined){
             if (nextValueR.classList.contains('shipDeployed')){
-              console.log('hello my lovelies')
+          
               selectedSquaresComp.push(nextValueR)
               nextValueR.classList.add('shipHitSuccess')
               nextValueR.style.backgroundColor = 'red'
@@ -1036,7 +1035,7 @@ function startGame() {
           const nextValueL = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Lvalue]
           if (selectedSquaresComp.includes(nextValueL) === false &&  nextValueL !== undefined){
             if (nextValueL.classList.contains('shipDeployed')){
-              console.log('hello my lovelies')
+          
               selectedSquaresComp.push(nextValueL)
               nextValueL.classList.add('shipHitSuccess')
               nextValueL.style.backgroundColor = 'red'
@@ -1124,7 +1123,7 @@ function startGame() {
           const nextValueU = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) - Uvalue]
           if (selectedSquaresComp.includes(nextValueU) === false &&  nextValueU !== undefined){
             if (nextValueU.classList.contains('shipDeployed')){
-              console.log('hello my lovelies')
+          
               selectedSquaresComp.push(nextValueU)
               nextValueU.classList.add('shipHitSuccess')
               nextValueU.style.backgroundColor = 'red'
@@ -1212,7 +1211,7 @@ function startGame() {
           const nextValueD = cellsPlayer[parseFloat(previousMoveComp.getAttribute('value')) + Dvalue]
           if (selectedSquaresComp.includes(nextValueD) === false  &&  nextValueD !== undefined){
             if (nextValueD.classList.contains('shipDeployed')){
-              console.log('hello my lovelies')
+          
               selectedSquaresComp.push(nextValueD)
               nextValueD.classList.add('shipHitSuccess')
               nextValueD.style.backgroundColor = 'red'
