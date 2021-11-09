@@ -107,4 +107,4 @@ The main challenge was being able to instruct the computer on picking places to 
 
 <h2>Key Learnings:</h2>
 
-    The process of building my first JS application helped me develop my understanding of the designing and implementation of key features and gameplay through the use of DOM events and JavaScript logic. Through heavy use of if statements and key variables I was able to develop a robust system that responded to key events in the gameplay.
+  The process of building my first JS application helped me develop my understanding of the designing and implementation of key features and gameplay through the use of DOM events and JavaScript logic. Through heavy use of if statements and key variables I was able to develop a robust system that responded to key events in the gameplay.
